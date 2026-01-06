@@ -1,5 +1,7 @@
 import type { Config } from "tailwindcss";
 
+// Custom scale utility for hover:scale-115
+
 export default {
   darkMode: ["class"],
   content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
@@ -13,6 +15,9 @@ export default {
       },
     },
     extend: {
+      scale: {
+        '115': '1.15',
+      },
       height: {
         '30': '7.5rem',
         '36': '9rem',
