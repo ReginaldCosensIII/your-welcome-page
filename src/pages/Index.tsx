@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/layout/Layout";
 import logoBadge from "@/assets/logo-badge.svg";
-import heroScreenshot from "@/assets/hero-screenshot.png";
+
 import { 
   Sparkles, 
   Zap, 
@@ -71,21 +71,8 @@ export default function Index() {
     <Layout>
       {/* Hero Section */}
       <section className="relative overflow-hidden min-h-[90vh] flex items-center">
-        {/* Background Screenshot with Effects */}
+        {/* Background Effects */}
         <div className="absolute inset-0 -z-10">
-          {/* Screenshot background */}
-          <div className="absolute inset-0 overflow-hidden">
-            <img 
-              src={heroScreenshot} 
-              alt="" 
-              className="w-full h-full object-cover object-center scale-110"
-              aria-hidden="true"
-            />
-            {/* Gradient overlay for readability - lighter to show more screenshot */}
-            <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background/80" />
-            {/* Brand gradient accent overlay */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-primary/15 via-transparent to-accent/15" />
-          </div>
           {/* Decorative blur orbs */}
           <div className="absolute top-0 right-0 w-[800px] h-[800px] opacity-15 blur-3xl rounded-full gradient-bg transform translate-x-1/3 -translate-y-1/2" />
           <div className="absolute bottom-0 left-0 w-[600px] h-[600px] opacity-10 blur-3xl rounded-full gradient-bg transform -translate-x-1/3 translate-y-1/2" />
@@ -93,22 +80,22 @@ export default function Index() {
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
           <div className="max-w-4xl mx-auto text-center">
-            {/* Badge Logo */}
-            <div className="mb-10 animate-fade-in">
-              <img 
-                src={logoBadge} 
-                alt="BlanketSmith" 
-                className="h-24 sm:h-28 lg:h-32 w-auto mx-auto animate-float"
-              />
-            </div>
-
-            {/* Beta Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border mb-8 animate-fade-in" style={{ animationDelay: "100ms" }}>
+            {/* Beta Badge - Moved to top */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border mb-8 animate-fade-in cursor-pointer transition-all duration-300 hover:scale-105 hover:border-primary/50 hover:shadow-glow">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 gradient-bg"></span>
               </span>
               <span className="text-sm font-medium text-foreground">Beta Release Coming Soon!</span>
+            </div>
+
+            {/* Badge Logo - Enlarged by 25% */}
+            <div className="mb-10 animate-fade-in" style={{ animationDelay: "100ms" }}>
+              <img 
+                src={logoBadge} 
+                alt="BlanketSmith" 
+                className="h-30 sm:h-36 lg:h-40 w-auto mx-auto animate-float"
+              />
             </div>
 
             {/* Brand Name */}
