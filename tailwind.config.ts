@@ -13,6 +13,11 @@ export default {
       },
     },
     extend: {
+      height: {
+        '30': '7.5rem',
+        '36': '9rem',
+        '40': '10rem',
+      },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         display: ['Poppins', 'system-ui', 'sans-serif'],
