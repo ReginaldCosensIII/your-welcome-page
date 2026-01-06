@@ -1,10 +1,27 @@
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import heroScreenshot from "@/assets/hero-screenshot.png";
 
 export function ToolMockup() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-200px" });
+  
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "center center"]
+  });
+
+  // Transform scroll progress to animation values
+  const rotateX = useTransform(scrollYProgress, [0, 1], [45, 0]);
+  const rotateY = useTransform(scrollYProgress, [0, 1], [-20, 0]);
+  const rotateZ = useTransform(scrollYProgress, [0, 1], [5, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.75, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
+  const y = useTransform(scrollYProgress, [0, 1], [60, 0]);
+  
+  // Shadow transforms
+  const shadowOpacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
+  const shadowScale = useTransform(scrollYProgress, [0, 1], [0.85, 1]);
+  const shadowY = useTransform(scrollYProgress, [0, 1], [40, 0]);
 
   return (
     <div className="mt-12 lg:mt-16 overflow-hidden">
@@ -17,60 +34,28 @@ export function ToolMockup() {
           style={{ perspective: "1500px" }}
         >
           <motion.div
-            initial={{ 
-              rotateX: 45, 
-              rotateY: -20, 
-              rotateZ: 5,
-              scale: 0.75,
-              opacity: 0,
-              y: 60
+            style={{ 
+              rotateX, 
+              rotateY, 
+              rotateZ,
+              scale,
+              opacity,
+              y,
+              transformStyle: "preserve-3d" 
             }}
-            animate={isInView ? { 
-              rotateX: 0, 
-              rotateY: 0, 
-              rotateZ: 0,
-              scale: 1,
-              opacity: 1,
-              y: 0
-            } : {}}
-            transition={{
-              duration: 1.4, 
-              ease: [0.25, 0.46, 0.45, 0.94] 
-            }}
-            style={{ transformStyle: "preserve-3d" }}
           >
             {/* Animated Shadow Layer */}
             <motion.div
-              initial={{ 
-                opacity: 0,
-                scale: 0.85,
-                y: 40
-              }}
-              animate={isInView ? { 
-                opacity: 1,
-                scale: 1,
-                y: 0
-              } : {}}
-              transition={{ 
-                duration: 1.6,
-                ease: [0.25, 0.46, 0.45, 0.94],
-                delay: 0.15
+              style={{
+                opacity: shadowOpacity,
+                scale: shadowScale,
+                y: shadowY
               }}
               className="absolute inset-0 -z-10 rounded-xl bg-gradient-to-b from-primary/20 to-accent/10 blur-3xl transform translate-y-8 scale-95"
             />
             
             {/* Browser Frame */}
-            <motion.div 
-              className="rounded-xl overflow-hidden border border-border bg-card relative"
-              initial={{ boxShadow: "0 10px 30px -10px rgba(0,0,0,0.1)" }}
-              animate={isInView ? { 
-                boxShadow: "0 50px 100px -20px rgba(0,0,0,0.25), 0 30px 60px -30px rgba(0,0,0,0.3)"
-              } : {}}
-              transition={{ 
-                duration: 1.6,
-                ease: [0.25, 0.46, 0.45, 0.94]
-              }}
-            >
+            <div className="rounded-xl overflow-hidden border border-border bg-card relative shadow-[0_50px_100px_-20px_rgba(0,0,0,0.25),0_30px_60px_-30px_rgba(0,0,0,0.3)]">
               {/* Browser Top Bar */}
               <div className="bg-secondary/80 border-b border-border px-4 py-3 flex items-center gap-3">
                 {/* Traffic Lights */}
@@ -102,7 +87,7 @@ export function ToolMockup() {
                 {/* Subtle gradient overlay at bottom */}
                 <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-card/50 to-transparent pointer-events-none" />
               </div>
-            </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>
