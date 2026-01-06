@@ -4,7 +4,7 @@ import heroScreenshot from "@/assets/hero-screenshot.png";
 
 export function ToolMockup() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const isInView = useInView(ref, { once: true, margin: "-200px" });
 
   return (
     <div className="mt-12 lg:mt-16 overflow-hidden">
