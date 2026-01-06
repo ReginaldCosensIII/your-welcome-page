@@ -22,29 +22,63 @@ export function ToolMockup() {
         <div 
           ref={ref}
           className="max-w-5xl mx-auto"
-          style={{ perspective: "1200px" }}
+          style={{ perspective: "1500px" }}
         >
           <motion.div
             initial={{ 
-              rotateX: 25, 
-              rotateY: -15, 
-              scale: 0.9,
-              opacity: 0 
+              rotateX: 45, 
+              rotateY: -20, 
+              rotateZ: 5,
+              scale: 0.75,
+              opacity: 0,
+              y: 60
             }}
             animate={isInView ? { 
               rotateX: 0, 
               rotateY: 0, 
+              rotateZ: 0,
               scale: 1,
-              opacity: 1 
+              opacity: 1,
+              y: 0
             } : {}}
-            transition={{ 
+            transition={{
               duration: 0.8, 
               ease: [0.25, 0.46, 0.45, 0.94] 
             }}
             style={{ transformStyle: "preserve-3d" }}
           >
+            {/* Animated Shadow Layer */}
+            <motion.div
+              initial={{ 
+                opacity: 0,
+                scale: 0.85,
+                y: 40
+              }}
+              animate={isInView ? { 
+                opacity: 1,
+                scale: 1,
+                y: 0
+              } : {}}
+              transition={{ 
+                duration: 1,
+                ease: [0.25, 0.46, 0.45, 0.94],
+                delay: 0.1
+              }}
+              className="absolute inset-0 -z-10 rounded-xl bg-gradient-to-b from-primary/20 to-accent/10 blur-3xl transform translate-y-8 scale-95"
+            />
+            
             {/* Browser Frame */}
-            <div className="rounded-xl overflow-hidden shadow-2xl border border-border bg-card">
+            <motion.div 
+              className="rounded-xl overflow-hidden border border-border bg-card relative"
+              initial={{ boxShadow: "0 10px 30px -10px rgba(0,0,0,0.1)" }}
+              animate={isInView ? { 
+                boxShadow: "0 50px 100px -20px rgba(0,0,0,0.25), 0 30px 60px -30px rgba(0,0,0,0.3)"
+              } : {}}
+              transition={{ 
+                duration: 1,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
+            >
               {/* Browser Top Bar */}
               <div className="bg-secondary/80 border-b border-border px-4 py-3 flex items-center gap-3">
                 {/* Traffic Lights */}
@@ -66,7 +100,7 @@ export function ToolMockup() {
               </div>
 
               {/* Screenshot */}
-              <div className="relative">
+              <div className="relative bg-background">
                 <img 
                   src={heroScreenshot} 
                   alt="BlanketSmith Pattern Tool Interface" 
@@ -76,7 +110,7 @@ export function ToolMockup() {
                 {/* Subtle gradient overlay at bottom */}
                 <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-card/50 to-transparent pointer-events-none" />
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>
