@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/layout/Layout";
+import { ToolMockup } from "@/components/ToolMockup";
 import logoBadge from "@/assets/logo-badge.svg";
 
-import { 
+import {
   Sparkles, 
   Zap, 
   Users, 
@@ -155,6 +156,9 @@ export default function Index() {
           </div>
         </div>
       </section>
+
+      {/* Tool Mockup Section */}
+      <ToolMockup />
 
       {/* Feature Highlights */}
       <section className="py-20 lg:py-28">
