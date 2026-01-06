@@ -1,0 +1,229 @@
+import { useState } from "react";
+import { Layout } from "@/components/layout/Layout";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Bug, Lightbulb, MessageSquare, CheckCircle2, ArrowRight } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+
+const feedbackTypes = [
+  {
+    id: "bug",
+    icon: Bug,
+    title: "Bug Report",
+    description: "Something isn't working as expected",
+  },
+  {
+    id: "feature",
+    icon: Lightbulb,
+    title: "Feature Request",
+    description: "Suggest a new feature or improvement",
+  },
+  {
+    id: "general",
+    icon: MessageSquare,
+    title: "General Feedback",
+    description: "Share your thoughts and experience",
+  },
+];
+
+export default function Feedback() {
+  const [selectedType, setSelectedType] = useState<string>("bug");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const { toast } = useToast();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    toast({
+      title: "Feedback submitted!",
+      description: "Thank you for helping us improve BlanketSmith.",
+    });
+  };
+
+  if (isSubmitted) {
+    return (
+      <Layout>
+        <section className="py-16 lg:py-24">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-xl mx-auto text-center">
+              <div className="w-16 h-16 mx-auto mb-6 rounded-full gradient-bg flex items-center justify-center">
+                <CheckCircle2 className="w-8 h-8 text-primary-foreground" />
+              </div>
+              <h1 className="font-display text-3xl font-bold text-foreground mb-4">
+                Thank you for your feedback!
+              </h1>
+              <p className="text-muted-foreground mb-8">
+                Your input helps us build a better tool for the maker community. 
+                We review every submission and will follow up if we need more details.
+              </p>
+              <Button 
+                variant="outline" 
+                onClick={() => setIsSubmitted(false)}
+              >
+                Submit more feedback
+              </Button>
+            </div>
+          </div>
+        </section>
+      </Layout>
+    );
+  }
+
+  return (
+    <Layout>
+      <section className="py-16 lg:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto">
+            {/* Header */}
+            <div className="text-center mb-12">
+              <h1 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">
+                Beta Feedback & Bug Reports
+              </h1>
+              <p className="text-muted-foreground text-lg max-w-xl mx-auto">
+                Your feedback directly shapes BlanketSmith. Report bugs, suggest features, 
+                or share your experience—we read everything.
+              </p>
+            </div>
+
+            {/* Feedback Type Selection */}
+            <div className="grid sm:grid-cols-3 gap-4 mb-10">
+              {feedbackTypes.map((type) => (
+                <button
+                  key={type.id}
+                  type="button"
+                  onClick={() => setSelectedType(type.id)}
+                  className={`p-5 rounded-xl border text-left transition-all ${
+                    selectedType === type.id
+                      ? "border-primary bg-primary/5 ring-2 ring-primary/20"
+                      : "border-border bg-card hover:border-primary/30"
+                  }`}
+                >
+                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-3 ${
+                    selectedType === type.id ? "gradient-bg" : "bg-secondary"
+                  }`}>
+                    <type.icon className={`w-5 h-5 ${
+                      selectedType === type.id ? "text-primary-foreground" : "text-foreground"
+                    }`} />
+                  </div>
+                  <h3 className="font-medium text-foreground mb-1">{type.title}</h3>
+                  <p className="text-xs text-muted-foreground">{type.description}</p>
+                </button>
+              ))}
+            </div>
+
+            {/* Form */}
+            <form 
+              onSubmit={handleSubmit}
+              className="rounded-2xl border border-border bg-card p-8"
+            >
+              <div className="space-y-5">
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Your name</Label>
+                    <Input 
+                      id="name" 
+                      placeholder="Jane Maker" 
+                      required 
+                      maxLength={100}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email address</Label>
+                    <Input 
+                      id="email" 
+                      type="email" 
+                      placeholder="jane@example.com" 
+                      required 
+                      maxLength={255}
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="title">
+                    {selectedType === "bug" 
+                      ? "Brief description of the issue" 
+                      : selectedType === "feature"
+                      ? "Feature title"
+                      : "Subject"
+                    }
+                  </Label>
+                  <Input 
+                    id="title" 
+                    placeholder={
+                      selectedType === "bug"
+                        ? "e.g., Pattern export fails on large designs"
+                        : selectedType === "feature"
+                        ? "e.g., Add color palette suggestions"
+                        : "e.g., My experience with the pattern editor"
+                    }
+                    required 
+                    maxLength={200}
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="details">
+                    {selectedType === "bug"
+                      ? "Steps to reproduce & expected behavior"
+                      : "Details"
+                    }
+                  </Label>
+                  <Textarea 
+                    id="details"
+                    placeholder={
+                      selectedType === "bug"
+                        ? "1. What were you trying to do?\n2. What happened instead?\n3. What did you expect to happen?"
+                        : selectedType === "feature"
+                        ? "Describe the feature and how it would help your workflow..."
+                        : "Share your thoughts, suggestions, or experience..."
+                    }
+                    className="min-h-[180px]"
+                    required
+                    maxLength={2000}
+                  />
+                </div>
+
+                {selectedType === "bug" && (
+                  <div className="space-y-2">
+                    <Label htmlFor="browser">Browser & device (optional)</Label>
+                    <Input 
+                      id="browser" 
+                      placeholder="e.g., Chrome on MacBook Pro"
+                      maxLength={100}
+                    />
+                  </div>
+                )}
+              </div>
+
+              <Button 
+                type="submit" 
+                variant="gradient" 
+                size="lg" 
+                className="w-full mt-8"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  "Submitting..."
+                ) : (
+                  <>
+                    Submit Feedback
+                    <ArrowRight className="w-4 h-4" />
+                  </>
+                )}
+              </Button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </Layout>
+  );
+}
