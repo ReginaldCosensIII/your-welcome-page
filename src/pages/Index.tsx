@@ -79,7 +79,7 @@ export default function Index() {
         </div>
 
         {/* Beta Badge - Fixed at top */}
-        <div className="pt-24 pb-4 text-center animate-fade-in">
+        <div className="pt-6 pb-2 text-center animate-fade-in">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border cursor-pointer transition-transform duration-300 hover:scale-110 hover:border-primary/50 hover:shadow-glow hover:bg-primary/10">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
@@ -94,11 +94,11 @@ export default function Index() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
               {/* Badge Logo */}
-              <div className="mb-8 animate-fade-in" style={{ animationDelay: "100ms" }}>
+              <div className="mb-6 animate-fade-in" style={{ animationDelay: "100ms" }}>
                 <img 
                   src={logoBadge} 
                   alt="BlanketSmith" 
-                  className="h-30 sm:h-36 lg:h-40 w-auto mx-auto animate-float"
+                  className="h-28 sm:h-32 lg:h-36 w-auto mx-auto animate-float"
                 />
               </div>
 
