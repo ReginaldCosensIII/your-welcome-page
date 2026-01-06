@@ -4,19 +4,11 @@ import heroScreenshot from "@/assets/hero-screenshot.png";
 
 export function ToolMockup() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section className="py-20 lg:py-28 overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">
-            See It in Action
-          </h2>
-          <p className="font-sans text-muted-foreground max-w-2xl mx-auto">
-            A clean, intuitive interface designed to make pattern creation effortless.
-          </p>
-        </div>
+    <div className="mt-12 lg:mt-16 overflow-hidden">
+      <div className="max-w-5xl mx-auto">
 
         {/* 3D Perspective Container */}
         <div 
@@ -42,7 +34,7 @@ export function ToolMockup() {
               y: 0
             } : {}}
             transition={{
-              duration: 0.8, 
+              duration: 1.4, 
               ease: [0.25, 0.46, 0.45, 0.94] 
             }}
             style={{ transformStyle: "preserve-3d" }}
@@ -60,9 +52,9 @@ export function ToolMockup() {
                 y: 0
               } : {}}
               transition={{ 
-                duration: 1,
+                duration: 1.6,
                 ease: [0.25, 0.46, 0.45, 0.94],
-                delay: 0.1
+                delay: 0.15
               }}
               className="absolute inset-0 -z-10 rounded-xl bg-gradient-to-b from-primary/20 to-accent/10 blur-3xl transform translate-y-8 scale-95"
             />
@@ -75,7 +67,7 @@ export function ToolMockup() {
                 boxShadow: "0 50px 100px -20px rgba(0,0,0,0.25), 0 30px 60px -30px rgba(0,0,0,0.3)"
               } : {}}
               transition={{ 
-                duration: 1,
+                duration: 1.6,
                 ease: [0.25, 0.46, 0.45, 0.94]
               }}
             >
@@ -114,6 +106,6 @@ export function ToolMockup() {
           </motion.div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

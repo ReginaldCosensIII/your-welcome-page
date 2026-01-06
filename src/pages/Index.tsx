@@ -154,11 +154,11 @@ export default function Index() {
               previews, and export options that work for your workflow.
             </p>
           </div>
+          
+          {/* Tool Mockup */}
+          <ToolMockup />
         </div>
       </section>
-
-      {/* Tool Mockup Section */}
-      <ToolMockup />
 
       {/* Feature Highlights */}
       <section className="py-20 lg:py-28">
