@@ -79,8 +79,8 @@ export default function Index() {
         </div>
 
         {/* Beta Badge - Fixed at top */}
-        <div className="pt-24 pb-4 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border animate-fade-in cursor-pointer transition-all duration-300 hover:scale-115 hover:border-primary/50 hover:shadow-glow hover:bg-primary/10">
+        <div className="pt-24 pb-4 text-center animate-fade-in">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border cursor-pointer transition-transform duration-300 hover:scale-110 hover:border-primary/50 hover:shadow-glow hover:bg-primary/10">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 gradient-bg"></span>
