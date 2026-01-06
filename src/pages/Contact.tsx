@@ -1,0 +1,198 @@
+import { useState } from "react";
+import { Layout } from "@/components/layout/Layout";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Mail, MessageSquare, HelpCircle, CheckCircle2, ArrowRight } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+
+const contactReasons = [
+  {
+    id: "general",
+    icon: MessageSquare,
+    title: "General Inquiry",
+    description: "Questions about BlanketSmith",
+  },
+  {
+    id: "support",
+    icon: HelpCircle,
+    title: "Support",
+    description: "Help with your account or the app",
+  },
+  {
+    id: "other",
+    icon: Mail,
+    title: "Other",
+    description: "Anything else on your mind",
+  },
+];
+
+export default function Contact() {
+  const [selectedReason, setSelectedReason] = useState<string>("general");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const { toast } = useToast();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    toast({
+      title: "Message sent!",
+      description: "We'll get back to you as soon as possible.",
+    });
+  };
+
+  if (isSubmitted) {
+    return (
+      <Layout>
+        <section className="py-16 lg:py-24">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-xl mx-auto text-center">
+              <div className="w-16 h-16 mx-auto mb-6 rounded-full gradient-bg flex items-center justify-center">
+                <CheckCircle2 className="w-8 h-8 text-primary-foreground" />
+              </div>
+              <h1 className="font-display text-3xl font-bold text-foreground mb-4">
+                Message received!
+              </h1>
+              <p className="text-muted-foreground mb-8">
+                Thank you for reaching out. We'll review your message and respond 
+                as quickly as possible—typically within 1-2 business days.
+              </p>
+              <Button 
+                variant="outline" 
+                onClick={() => setIsSubmitted(false)}
+              >
+                Send another message
+              </Button>
+            </div>
+          </div>
+        </section>
+      </Layout>
+    );
+  }
+
+  return (
+    <Layout>
+      <section className="py-16 lg:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto">
+            {/* Header */}
+            <div className="text-center mb-12">
+              <h1 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">
+                Get in Touch
+              </h1>
+              <p className="text-muted-foreground text-lg max-w-xl mx-auto">
+                Have a question or just want to say hello? We'd love to hear from you. 
+                Fill out the form below and we'll get back to you shortly.
+              </p>
+            </div>
+
+            {/* Reason Selection */}
+            <div className="grid sm:grid-cols-3 gap-4 mb-10">
+              {contactReasons.map((reason) => (
+                <button
+                  key={reason.id}
+                  type="button"
+                  onClick={() => setSelectedReason(reason.id)}
+                  className={`p-5 rounded-xl border text-left transition-all ${
+                    selectedReason === reason.id
+                      ? "border-primary bg-primary/5 ring-2 ring-primary/20"
+                      : "border-border bg-card hover:border-primary/30"
+                  }`}
+                >
+                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-3 ${
+                    selectedReason === reason.id ? "gradient-bg" : "bg-secondary"
+                  }`}>
+                    <reason.icon className={`w-5 h-5 ${
+                      selectedReason === reason.id ? "text-primary-foreground" : "text-foreground"
+                    }`} />
+                  </div>
+                  <h3 className="font-medium text-foreground mb-1">{reason.title}</h3>
+                  <p className="text-xs text-muted-foreground">{reason.description}</p>
+                </button>
+              ))}
+            </div>
+
+            {/* Form */}
+            <form 
+              onSubmit={handleSubmit}
+              className="rounded-2xl border border-border bg-card p-8"
+            >
+              <div className="space-y-5">
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Your name</Label>
+                    <Input 
+                      id="name" 
+                      placeholder="Jane Maker" 
+                      required 
+                      maxLength={100}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email address</Label>
+                    <Input 
+                      id="email" 
+                      type="email" 
+                      placeholder="jane@example.com" 
+                      required 
+                      maxLength={255}
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="subject">Subject</Label>
+                  <Input 
+                    id="subject" 
+                    placeholder="What's this about?"
+                    required 
+                    maxLength={200}
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="message">Message</Label>
+                  <Textarea 
+                    id="message"
+                    placeholder="Tell us what's on your mind..."
+                    className="min-h-[180px]"
+                    required
+                    maxLength={2000}
+                  />
+                </div>
+              </div>
+
+              <Button 
+                type="submit" 
+                variant="gradient" 
+                size="lg" 
+                className="w-full mt-8"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  "Sending..."
+                ) : (
+                  <>
+                    Send Message
+                    <ArrowRight className="w-4 h-4" />
+                  </>
+                )}
+              </Button>
+
+              <p className="text-xs text-muted-foreground text-center mt-4">
+                We typically respond within 1-2 business days.
+              </p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </Layout>
+  );
+}
