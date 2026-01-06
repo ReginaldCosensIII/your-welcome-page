@@ -22,6 +22,7 @@ export default {
         '30': '7.5rem',
         '36': '9rem',
         '40': '10rem',
+        '44': '11rem',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

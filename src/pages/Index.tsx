@@ -98,7 +98,7 @@ export default function Index() {
                 <img 
                   src={logoBadge} 
                   alt="BlanketSmith" 
-                  className="h-28 sm:h-32 lg:h-36 w-auto mx-auto animate-float"
+                  className="h-36 sm:h-40 lg:h-44 w-auto mx-auto animate-float"
                 />
               </div>
 
