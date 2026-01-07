@@ -22,6 +22,11 @@ export function ToolMockup() {
   const shadowOpacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
   const shadowScale = useTransform(scrollYProgress, [0, 1], [0.85, 1]);
   const shadowY = useTransform(scrollYProgress, [0, 1], [40, 0]);
+  
+  // Parallax transforms for inner elements (different speeds create depth)
+  const topBarY = useTransform(scrollYProgress, [0, 1], [-8, 0]);
+  const screenshotY = useTransform(scrollYProgress, [0, 1], [15, 0]);
+  const screenshotScale = useTransform(scrollYProgress, [0, 1], [1.02, 1]);
 
   return (
     <div className="mt-12 lg:mt-16 overflow-hidden">
@@ -56,8 +61,11 @@ export function ToolMockup() {
             
             {/* Browser Frame */}
             <div className="rounded-xl overflow-hidden border border-border bg-card relative shadow-[0_50px_100px_-20px_rgba(0,0,0,0.25),0_30px_60px_-30px_rgba(0,0,0,0.3)]">
-              {/* Browser Top Bar */}
-              <div className="bg-secondary/80 border-b border-border px-4 py-3 flex items-center gap-3">
+              {/* Browser Top Bar - parallax layer */}
+              <motion.div 
+                style={{ y: topBarY }}
+                className="bg-secondary/80 border-b border-border px-4 py-3 flex items-center gap-3 relative z-10"
+              >
                 {/* Traffic Lights */}
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-full bg-red-400/80" />
@@ -74,10 +82,13 @@ export function ToolMockup() {
                 
                 {/* Spacer for symmetry */}
                 <div className="w-14" />
-              </div>
+              </motion.div>
 
-              {/* Screenshot */}
-              <div className="relative bg-background">
+              {/* Screenshot - parallax layer with slight zoom */}
+              <motion.div 
+                style={{ y: screenshotY, scale: screenshotScale }}
+                className="relative bg-background origin-top"
+              >
                 <img 
                   src={heroScreenshot} 
                   alt="BlanketSmith Pattern Tool Interface" 
@@ -86,7 +97,7 @@ export function ToolMockup() {
                 
                 {/* Subtle gradient overlay at bottom */}
                 <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-card/50 to-transparent pointer-events-none" />
-              </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>
