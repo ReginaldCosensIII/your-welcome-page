@@ -63,7 +63,8 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         brand: {
-          blue: "hsl(var(--brand-blue))",
+          purple: "hsl(var(--brand-purple))",
+          midblue: "hsl(var(--brand-midblue))",
           cyan: "hsl(var(--brand-cyan))",
           slate: "hsl(var(--brand-slate))",
         },
