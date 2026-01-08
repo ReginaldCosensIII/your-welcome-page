@@ -74,9 +74,13 @@ export default function Index() {
       <section className="relative overflow-hidden min-h-screen flex flex-col">
         {/* Background Effects */}
         <div className="absolute inset-0 -z-10">
-          {/* Decorative blur orbs */}
-          <div className="absolute top-0 right-0 w-[800px] h-[800px] opacity-15 blur-3xl rounded-full gradient-bg transform translate-x-1/3 -translate-y-1/2" />
-          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] opacity-10 blur-3xl rounded-full gradient-bg transform -translate-x-1/3 translate-y-1/2" />
+          {/* Purple gradient orbs - top right and bottom left */}
+          <div className="absolute top-0 right-0 w-[900px] h-[900px] opacity-25 blur-3xl rounded-full gradient-bg transform translate-x-1/4 -translate-y-1/3" />
+          <div className="absolute bottom-0 left-0 w-[700px] h-[700px] opacity-20 blur-3xl rounded-full gradient-bg transform -translate-x-1/4 translate-y-1/3" />
+          
+          {/* Cyan orbs - top left and bottom right */}
+          <div className="absolute top-0 left-0 w-[600px] h-[600px] opacity-20 blur-3xl rounded-full bg-accent transform -translate-x-1/4 -translate-y-1/3" />
+          <div className="absolute bottom-0 right-0 w-[500px] h-[500px] opacity-15 blur-3xl rounded-full bg-accent transform translate-x-1/4 translate-y-1/3" />
         </div>
 
         {/* Beta Badge - Fixed at top */}
