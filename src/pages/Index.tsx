@@ -81,14 +81,14 @@ export default function Index() {
           <div className="hidden md:block absolute top-0 left-0 w-[300px] h-[300px] lg:w-[400px] lg:h-[400px] opacity-10 lg:opacity-15 blur-3xl rounded-full bg-accent transform -translate-x-1/3 -translate-y-1/3" />
           <div className="hidden md:block absolute bottom-0 right-0 w-[300px] h-[300px] lg:w-[400px] lg:h-[400px] opacity-10 lg:opacity-15 blur-3xl rounded-full bg-accent transform translate-x-1/3 translate-y-1/3" />
           
-          {/* Graph paper texture with grid - hidden on mobile for cleaner look */}
-          <div className="hidden md:block absolute inset-0 opacity-[0.03] lg:opacity-[0.05]" 
+          {/* Graph paper texture with grid */}
+          <div className="absolute inset-0 opacity-[0.025] md:opacity-[0.03] lg:opacity-[0.05]" 
             style={{
               backgroundImage: `
                 linear-gradient(to right, hsl(var(--muted-foreground)) 1px, transparent 1px),
                 linear-gradient(to bottom, hsl(var(--muted-foreground)) 1px, transparent 1px)
               `,
-              backgroundSize: '40px 40px'
+              backgroundSize: '30px 30px',
             }}
           />
           
