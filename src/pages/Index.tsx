@@ -74,9 +74,48 @@ export default function Index() {
       <section className="relative overflow-hidden min-h-screen flex flex-col">
         {/* Background Effects */}
         <div className="absolute inset-0 -z-10">
-          {/* Decorative blur orbs */}
-          <div className="absolute top-0 right-0 w-[800px] h-[800px] opacity-15 blur-3xl rounded-full gradient-bg transform translate-x-1/3 -translate-y-1/2" />
-          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] opacity-10 blur-3xl rounded-full gradient-bg transform -translate-x-1/3 translate-y-1/2" />
+          {/* Decorative blur orbs - enhanced with cyan */}
+          <div className="absolute top-0 right-0 w-[400px] h-[400px] md:w-[600px] md:h-[600px] lg:w-[800px] lg:h-[800px] opacity-20 lg:opacity-25 blur-3xl rounded-full gradient-bg transform translate-x-1/4 -translate-y-1/4" />
+          <div className="absolute bottom-0 left-0 w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-15 lg:opacity-20 blur-3xl rounded-full gradient-bg transform -translate-x-1/4 translate-y-1/4" />
+          {/* Cyan accent orbs in opposite corners */}
+          <div className="hidden md:block absolute top-0 left-0 w-[300px] h-[300px] lg:w-[400px] lg:h-[400px] opacity-10 lg:opacity-15 blur-3xl rounded-full bg-accent transform -translate-x-1/3 -translate-y-1/3" />
+          <div className="hidden md:block absolute bottom-0 right-0 w-[300px] h-[300px] lg:w-[400px] lg:h-[400px] opacity-10 lg:opacity-15 blur-3xl rounded-full bg-accent transform translate-x-1/3 translate-y-1/3" />
+          
+          {/* Graph paper texture with grid - hidden on mobile for cleaner look */}
+          <div className="hidden md:block absolute inset-0 opacity-[0.03] lg:opacity-[0.05]" 
+            style={{
+              backgroundImage: `
+                linear-gradient(to right, hsl(var(--muted-foreground)) 1px, transparent 1px),
+                linear-gradient(to bottom, hsl(var(--muted-foreground)) 1px, transparent 1px)
+              `,
+              backgroundSize: '40px 40px'
+            }}
+          />
+          
+          {/* Red crosshair guidelines pointing to content - desktop only */}
+          <div className="hidden lg:block absolute inset-0 pointer-events-none">
+            {/* Vertical dashed line */}
+            <div className="absolute left-1/2 top-0 bottom-0 w-0 -translate-x-1/2 border-l-2 border-dashed opacity-[0.08]" 
+              style={{ borderColor: 'hsl(340, 82%, 52%)' }}
+            />
+            {/* Horizontal dashed line - positioned at content center */}
+            <div className="absolute top-1/2 left-0 right-0 h-0 -translate-y-1/2 border-t-2 border-dashed opacity-[0.08]" 
+              style={{ borderColor: 'hsl(340, 82%, 52%)' }}
+            />
+          </div>
+          
+          {/* Tablet crosshair - more subtle */}
+          <div className="hidden md:block lg:hidden absolute inset-0 pointer-events-none">
+            <div className="absolute left-1/2 top-0 bottom-0 w-0 -translate-x-1/2 border-l border-dashed opacity-[0.05]" 
+              style={{ borderColor: 'hsl(340, 82%, 52%)' }}
+            />
+            <div className="absolute top-1/2 left-0 right-0 h-0 -translate-y-1/2 border-t border-dashed opacity-[0.05]" 
+              style={{ borderColor: 'hsl(340, 82%, 52%)' }}
+            />
+          </div>
+          
+          {/* White radial gradient behind content for readability */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,hsl(0_0%_100%/0.9),transparent_70%)] md:bg-[radial-gradient(ellipse_50%_40%_at_50%_50%,hsl(0_0%_100%/0.85),transparent_60%)]" />
         </div>
 
         {/* Beta Badge - Fixed at top */}
