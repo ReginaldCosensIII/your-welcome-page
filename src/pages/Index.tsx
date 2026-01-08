@@ -74,10 +74,10 @@ export default function Index() {
       <section className="relative overflow-hidden min-h-screen flex flex-col">
         {/* Background Effects */}
         <div className="absolute inset-0 -z-10">
-          {/* Decorative blur orbs - enhanced with cyan */}
-          <div className="absolute top-0 right-0 w-[400px] h-[400px] md:w-[600px] md:h-[600px] lg:w-[800px] lg:h-[800px] opacity-20 lg:opacity-25 blur-3xl rounded-full gradient-bg transform translate-x-1/4 -translate-y-1/4" />
-          <div className="absolute bottom-0 left-0 w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-15 lg:opacity-20 blur-3xl rounded-full gradient-bg transform -translate-x-1/4 translate-y-1/4" />
-          {/* Cyan accent orbs in opposite corners */}
+          {/* Decorative blur orbs - symmetrical gradient orbs */}
+          <div className="absolute top-0 right-0 w-[300px] h-[300px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px] opacity-20 lg:opacity-25 blur-3xl rounded-full gradient-bg transform translate-x-1/4 -translate-y-1/4" />
+          <div className="absolute bottom-0 left-0 w-[300px] h-[300px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px] opacity-20 lg:opacity-25 blur-3xl rounded-full gradient-bg transform -translate-x-1/4 translate-y-1/4" />
+          {/* Cyan accent orbs in opposite corners - symmetrical */}
           <div className="hidden md:block absolute top-0 left-0 w-[300px] h-[300px] lg:w-[400px] lg:h-[400px] opacity-10 lg:opacity-15 blur-3xl rounded-full bg-accent transform -translate-x-1/3 -translate-y-1/3" />
           <div className="hidden md:block absolute bottom-0 right-0 w-[300px] h-[300px] lg:w-[400px] lg:h-[400px] opacity-10 lg:opacity-15 blur-3xl rounded-full bg-accent transform translate-x-1/3 translate-y-1/3" />
           
