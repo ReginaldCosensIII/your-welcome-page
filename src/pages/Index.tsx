@@ -74,18 +74,9 @@ export default function Index() {
       <section className="relative overflow-hidden min-h-screen flex flex-col">
         {/* Background Effects */}
         <div className="absolute inset-0 -z-10">
-          {/* Mobile/Tablet: Subtle original orbs */}
-          <div className="lg:hidden absolute top-0 right-0 w-[400px] h-[400px] opacity-10 blur-3xl rounded-full gradient-bg transform translate-x-1/3 -translate-y-1/2" />
-          <div className="lg:hidden absolute bottom-0 left-0 w-[300px] h-[300px] opacity-8 blur-3xl rounded-full gradient-bg transform -translate-x-1/3 translate-y-1/2" />
-          
-          {/* Desktop: Enhanced four-corner orbs */}
-          {/* Purple gradient orbs - top right and bottom left */}
-          <div className="hidden lg:block absolute top-0 right-0 w-[800px] h-[800px] opacity-15 blur-3xl rounded-full gradient-bg transform translate-x-1/4 -translate-y-1/3" />
-          <div className="hidden lg:block absolute bottom-0 left-0 w-[600px] h-[600px] opacity-12 blur-3xl rounded-full gradient-bg transform -translate-x-1/4 translate-y-1/3" />
-          
-          {/* Cyan orbs - top left and bottom right */}
-          <div className="hidden lg:block absolute top-0 left-0 w-[500px] h-[500px] opacity-12 blur-3xl rounded-full bg-accent transform -translate-x-1/4 -translate-y-1/3" />
-          <div className="hidden lg:block absolute bottom-0 right-0 w-[400px] h-[400px] opacity-10 blur-3xl rounded-full bg-accent transform translate-x-1/4 translate-y-1/3" />
+          {/* Decorative blur orbs */}
+          <div className="absolute top-0 right-0 w-[800px] h-[800px] opacity-15 blur-3xl rounded-full gradient-bg transform translate-x-1/3 -translate-y-1/2" />
+          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] opacity-10 blur-3xl rounded-full gradient-bg transform -translate-x-1/3 translate-y-1/2" />
         </div>
 
         {/* Beta Badge - Fixed at top */}
