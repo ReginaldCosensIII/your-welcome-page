@@ -82,40 +82,45 @@ export default function Index() {
           <div className="hidden md:block absolute bottom-0 right-0 w-[300px] h-[300px] lg:w-[400px] lg:h-[400px] opacity-[0.06] lg:opacity-[0.08] blur-3xl rounded-full bg-accent transform translate-x-1/3 translate-y-1/3" />
           
           {/* Graph paper texture with grid */}
-          <div className="absolute inset-0 opacity-[0.025] md:opacity-[0.03] lg:opacity-[0.05]" 
+          <div
+            className="absolute inset-0 opacity-[0.025] md:opacity-[0.03] lg:opacity-[0.05] mix-blend-multiply"
             style={{
               backgroundImage: `
                 linear-gradient(to right, hsl(var(--muted-foreground)) 1px, transparent 1px),
                 linear-gradient(to bottom, hsl(var(--muted-foreground)) 1px, transparent 1px)
               `,
-              backgroundSize: '30px 30px',
+              backgroundSize: "30px 30px",
             }}
           />
-          
+
           {/* Red crosshair guidelines pointing to content - desktop only */}
           <div className="hidden lg:block absolute inset-0 pointer-events-none">
             {/* Vertical dashed line */}
-            <div className="absolute left-1/2 top-0 bottom-0 w-0 -translate-x-1/2 border-l-2 border-dashed opacity-[0.08]" 
-              style={{ borderColor: 'hsl(340, 82%, 52%)' }}
+            <div
+              className="absolute left-1/2 top-0 bottom-0 w-0 -translate-x-1/2 border-l-2 border-dashed opacity-[0.08]"
+              style={{ borderColor: "hsl(340, 82%, 52%)" }}
             />
             {/* Horizontal dashed line - positioned at content center */}
-            <div className="absolute top-1/2 left-0 right-0 h-0 -translate-y-1/2 border-t-2 border-dashed opacity-[0.08]" 
-              style={{ borderColor: 'hsl(340, 82%, 52%)' }}
+            <div
+              className="absolute top-1/2 left-0 right-0 h-0 -translate-y-1/2 border-t-2 border-dashed opacity-[0.08]"
+              style={{ borderColor: "hsl(340, 82%, 52%)" }}
             />
           </div>
-          
+
           {/* Tablet crosshair - more subtle */}
           <div className="hidden md:block lg:hidden absolute inset-0 pointer-events-none">
-            <div className="absolute left-1/2 top-0 bottom-0 w-0 -translate-x-1/2 border-l border-dashed opacity-[0.05]" 
-              style={{ borderColor: 'hsl(340, 82%, 52%)' }}
+            <div
+              className="absolute left-1/2 top-0 bottom-0 w-0 -translate-x-1/2 border-l border-dashed opacity-[0.05]"
+              style={{ borderColor: "hsl(340, 82%, 52%)" }}
             />
-            <div className="absolute top-1/2 left-0 right-0 h-0 -translate-y-1/2 border-t border-dashed opacity-[0.05]" 
-              style={{ borderColor: 'hsl(340, 82%, 52%)' }}
+            <div
+              className="absolute top-1/2 left-0 right-0 h-0 -translate-y-1/2 border-t border-dashed opacity-[0.05]"
+              style={{ borderColor: "hsl(340, 82%, 52%)" }}
             />
           </div>
-          
+
           {/* White radial gradient behind content for readability */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,hsl(0_0%_100%/0.9),transparent_70%)] md:bg-[radial-gradient(ellipse_50%_40%_at_50%_50%,hsl(0_0%_100%/0.85),transparent_60%)]" />
+          <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,hsl(var(--background)/0.9),transparent_60%)] md:bg-[radial-gradient(ellipse_50%_40%_at_50%_50%,hsl(var(--background)/0.85),transparent_55%)]" />
         </div>
 
         {/* Beta Badge - Fixed at top */}
