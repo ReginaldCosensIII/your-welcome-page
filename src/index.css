@@ -130,6 +130,16 @@
     background: var(--gradient-brand);
   }
 
+  /* Deeper cyan/blue orb so fine grid lines remain readable (vs. bright flat cyan) */
+  .accent-orb {
+    background: radial-gradient(
+      circle at 35% 35%,
+      hsl(var(--accent) / 0.22) 0%,
+      hsl(var(--brand-midblue) / 0.20) 38%,
+      transparent 72%
+    );
+  }
+
   .gradient-border {
     position: relative;
     background: var(--gradient-brand);
@@ -142,3 +152,4 @@
     border-radius: calc(var(--radius) - 2px);
   }
 }
+
