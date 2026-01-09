@@ -77,9 +77,9 @@ export default function Index() {
           {/* Decorative blur orbs - symmetrical gradient orbs */}
           <div className="absolute top-0 right-0 w-[300px] h-[300px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px] opacity-20 lg:opacity-25 blur-3xl rounded-full gradient-bg transform translate-x-1/4 -translate-y-1/4" />
           <div className="absolute bottom-0 left-0 w-[300px] h-[300px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px] opacity-20 lg:opacity-25 blur-3xl rounded-full gradient-bg transform -translate-x-1/4 translate-y-1/4" />
-          {/* Cyan accent orbs in opposite corners - deeper gradient so grid reads consistently */}
-          <div className="hidden md:block absolute top-0 left-0 w-[300px] h-[300px] lg:w-[400px] lg:h-[400px] blur-3xl rounded-full accent-orb transform -translate-x-1/3 -translate-y-1/3" />
-          <div className="hidden md:block absolute bottom-0 right-0 w-[300px] h-[300px] lg:w-[400px] lg:h-[400px] blur-3xl rounded-full accent-orb transform translate-x-1/3 translate-y-1/3" />
+          {/* Cyan accent orbs in opposite corners - matched size to purple orbs */}
+          <div className="hidden md:block absolute top-0 left-0 w-[450px] h-[450px] lg:w-[550px] lg:h-[550px] blur-3xl rounded-full accent-orb transform -translate-x-1/3 -translate-y-1/3" />
+          <div className="hidden md:block absolute bottom-0 right-0 w-[450px] h-[450px] lg:w-[550px] lg:h-[550px] blur-3xl rounded-full accent-orb transform translate-x-1/3 translate-y-1/3" />
           
           {/* Graph paper texture with grid */}
           <div
