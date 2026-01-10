@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/layout/Layout";
 import { ToolMockup } from "@/components/ToolMockup";
 import logoBadge from "@/assets/logo-badge.svg";
+import communityCrafting from "@/assets/community-crafting.jpg";
 
 import {
   Sparkles, 
@@ -243,14 +244,23 @@ export default function Index() {
       <section className="py-20 lg:py-28 bg-secondary/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-16">
+            <div className="text-center mb-12">
               <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">
                 About BlanketSmith
               </h2>
-              <p className="font-sans text-muted-foreground max-w-2xl mx-auto text-lg">
+              <p className="font-sans text-muted-foreground max-w-2xl mx-auto text-lg mb-10">
                 We're building more than a tool—we're nurturing a community of makers 
                 who believe creativity should be accessible to everyone.
               </p>
+              
+              {/* Community Image */}
+              <div className="max-w-3xl mx-auto rounded-2xl overflow-hidden shadow-soft border border-border">
+                <img 
+                  src={communityCrafting} 
+                  alt="Makers collaborating on colorful blanket and quilting projects" 
+                  className="w-full h-auto"
+                />
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
