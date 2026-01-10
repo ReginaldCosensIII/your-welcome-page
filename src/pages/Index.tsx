@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/layout/Layout";
 import { ToolMockup } from "@/components/ToolMockup";
+import { FeatureTourMockup } from "@/components/FeatureTourMockup";
 import logoBadge from "@/assets/logo-badge.svg";
 import communityCrafting from "@/assets/community-crafting.jpg";
 
@@ -208,7 +209,7 @@ export default function Index() {
       {/* Feature Highlights */}
       <section className="py-20 lg:py-28">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">
               Feature Highlights
             </h2>
@@ -217,6 +218,11 @@ export default function Index() {
               No fluff—just the tools you need to bring your patterns to life.
             </p>
           </div>
+
+          {/* Feature Tour Mockup */}
+          <FeatureTourMockup />
+
+          <div className="mt-16">
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {features.map((feature, index) => (
@@ -236,6 +242,7 @@ export default function Index() {
                 </p>
               </div>
             ))}
+            </div>
           </div>
         </div>
       </section>
