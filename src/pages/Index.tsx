@@ -75,11 +75,11 @@ export default function Index() {
         {/* Background Effects */}
         <div className="absolute inset-0 -z-10">
           {/* Decorative blur orbs - symmetrical gradient orbs */}
-          <div className="absolute top-0 right-0 w-[300px] h-[300px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px] opacity-20 lg:opacity-25 blur-3xl rounded-full gradient-bg transform translate-x-[22%] -translate-y-[28%]" />
-          <div className="absolute bottom-0 left-0 w-[300px] h-[300px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px] opacity-20 lg:opacity-25 blur-3xl rounded-full gradient-bg transform -translate-x-[26%] translate-y-[24%]" />
-          {/* Cyan accent orbs in opposite corners - matched size to purple orbs */}
+          <div className="absolute top-0 right-0 w-[280px] h-[280px] md:w-[400px] md:h-[400px] lg:w-[480px] lg:h-[480px] opacity-20 lg:opacity-25 blur-3xl rounded-full gradient-bg transform translate-x-[22%] -translate-y-[28%]" />
+          <div className="absolute bottom-0 left-0 w-[260px] h-[260px] md:w-[380px] md:h-[380px] lg:w-[450px] lg:h-[450px] opacity-20 lg:opacity-25 blur-3xl rounded-full gradient-bg transform -translate-x-[30%] translate-y-[32%]" />
+          {/* Cyan accent orbs in opposite corners */}
           <div className="hidden md:block absolute top-0 left-0 w-[450px] h-[450px] lg:w-[550px] lg:h-[550px] blur-3xl rounded-full accent-orb transform -translate-x-[24%] -translate-y-[26%]" />
-          <div className="hidden md:block absolute bottom-0 right-0 w-[450px] h-[450px] lg:w-[550px] lg:h-[550px] blur-3xl rounded-full accent-orb transform translate-x-[28%] translate-y-[22%]" />
+          <div className="hidden md:block absolute bottom-0 right-0 w-[380px] h-[380px] lg:w-[450px] lg:h-[450px] blur-3xl rounded-full accent-orb transform translate-x-[32%] translate-y-[30%]" />
           
           {/* Graph paper texture with grid */}
           <div
