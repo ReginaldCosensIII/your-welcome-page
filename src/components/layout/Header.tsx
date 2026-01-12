@@ -37,8 +37,8 @@ export function Header() {
                 to={link.href}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   location.pathname === link.href
-                    ? "text-primary-foreground bg-primary/90"
-                    : "text-muted-foreground hover:text-foreground hover:bg-primary/10"
+                    ? "text-white bg-brand-midblue"
+                    : "text-muted-foreground hover:text-foreground hover:bg-brand-cyan/20"
                 }`}
               >
                 {link.label}
@@ -78,8 +78,8 @@ export function Header() {
                   onClick={() => setMobileMenuOpen(false)}
                   className={`px-4 py-3 rounded-lg text-base font-medium transition-colors ${
                     location.pathname === link.href
-                      ? "text-primary-foreground bg-primary/90"
-                      : "text-muted-foreground hover:text-foreground hover:bg-primary/10"
+                      ? "text-white bg-brand-midblue"
+                      : "text-muted-foreground hover:text-foreground hover:bg-brand-cyan/20"
                   }`}
                 >
                   {link.label}
