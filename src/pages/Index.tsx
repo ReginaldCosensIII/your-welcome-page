@@ -231,8 +231,8 @@ export default function Index() {
                 className="group p-6 lg:p-8 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-soft transition-all duration-300"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 border border-primary/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
-                  <feature.icon className="w-6 h-6 text-primary" strokeWidth={1.5} />
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-midblue/10 to-brand-cyan/10 border border-brand-midblue/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+                  <feature.icon className="w-6 h-6 text-brand-midblue" strokeWidth={1.5} />
                 </div>
                 <h3 className="font-display text-lg font-semibold text-foreground mb-2">
                   {feature.title}
