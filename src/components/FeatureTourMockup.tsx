@@ -22,8 +22,8 @@ export function FeatureTourMockup() {
   const shadowOpacity = useTransform(scrollYProgress, [0, 0.6], [0, 1]);
 
   return (
-    <div className="mt-12 lg:mt-16 overflow-hidden">
-      <div className="max-w-5xl mx-auto">
+<div className="mt-8 lg:mt-12 overflow-hidden">
+      <div className="max-w-4xl mx-auto">
         {/* 3D Perspective Container */}
         <div 
           ref={ref}
@@ -109,13 +109,6 @@ export function FeatureTourMockup() {
                 </div>
               </div>
               
-              {/* Monitor Stand */}
-              <div className="flex justify-center mt-0">
-                <div className="w-24 sm:w-32 h-6 sm:h-8 bg-gradient-to-b from-secondary to-muted rounded-b-lg border-x border-b border-border" />
-              </div>
-              <div className="flex justify-center -mt-1">
-                <div className="w-40 sm:w-52 h-2 sm:h-3 bg-gradient-to-b from-muted to-secondary/50 rounded-b-full border-x border-b border-border" />
-              </div>
             </div>
           </motion.div>
         </div>
