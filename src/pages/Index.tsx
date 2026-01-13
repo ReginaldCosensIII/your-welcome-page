@@ -294,7 +294,7 @@ export default function Index() {
                 BlanketSmith is currently in beta. We're actively developing new features 
                 and listening to feedback from makers like you.
               </p>
-              <Button variant="gradient-outline" size="lg" asChild>
+              <Button variant="gradient" size="lg" asChild>
                 <Link to="/partnerships">
                   Partner With Us
                   <ArrowRight className="w-4 h-4" />
@@ -319,7 +319,7 @@ export default function Index() {
             </p>
             <Button 
               size="xl" 
-              className="bg-background text-foreground hover:bg-background/90 shadow-lg font-sans"
+              className="bg-background text-foreground hover:bg-background/90 hover:scale-[1.02] active:scale-[0.98] shadow-lg font-sans"
               asChild
             >
               <Link to="/beta-signup">
