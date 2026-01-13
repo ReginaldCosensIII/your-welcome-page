@@ -29,8 +29,8 @@ export function ToolMockup() {
   const screenshotScale = useTransform(scrollYProgress, [0, 1], [1.02, 1]);
 
   return (
-    <div className="mt-12 lg:mt-16 overflow-hidden">
-      <div className="max-w-5xl mx-auto">
+<div className="mt-8 lg:mt-12 overflow-hidden">
+      <div className="max-w-4xl mx-auto">
 
         {/* 3D Perspective Container */}
         <div 
