@@ -35,10 +35,10 @@ export function Header() {
               <Link
                 key={link.href}
                 to={link.href}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ease-out ${
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ease-out ${
                   location.pathname === link.href
-                    ? "text-white bg-brand-midblue"
-                    : "text-muted-foreground hover:text-foreground hover:bg-brand-cyan/10"
+                    ? "text-brand-midblue bg-brand-midblue/10 border border-brand-purple/30 shadow-[0_0_15px_rgba(92,174,255,0.3)]"
+                    : "text-muted-foreground border border-transparent hover:text-brand-midblue hover:bg-brand-midblue/10 hover:border-brand-purple/30 hover:shadow-[0_0_15px_rgba(92,174,255,0.25)]"
                 }`}
               >
                 {link.label}
@@ -76,10 +76,10 @@ export function Header() {
                   key={link.href}
                   to={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 ease-out ${
+                  className={`px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 ease-out ${
                     location.pathname === link.href
-                      ? "text-white bg-brand-midblue"
-                      : "text-muted-foreground hover:text-foreground hover:bg-brand-cyan/10"
+                      ? "text-brand-midblue bg-brand-midblue/10 border border-brand-purple/30 shadow-[0_0_15px_rgba(92,174,255,0.3)]"
+                      : "text-muted-foreground border border-transparent hover:text-brand-midblue hover:bg-brand-midblue/10 hover:border-brand-purple/30 hover:shadow-[0_0_15px_rgba(92,174,255,0.25)]"
                   }`}
                 >
                   {link.label}
