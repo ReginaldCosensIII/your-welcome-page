@@ -6,7 +6,6 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { CheckCircle2, ArrowRight, Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import betaCommunityImage from "@/assets/beta-community.jpg";
 
 const betaPerks = [
   "Full access to all beta features",
@@ -83,15 +82,6 @@ export default function BetaSignup() {
                       </p>
                     </div>
                   </div>
-                </div>
-
-                {/* Community Image */}
-                <div className="mt-8 rounded-2xl overflow-hidden border border-border shadow-lg">
-                  <img 
-                    src={betaCommunityImage} 
-                    alt="Community of crafters sharing colorful blanket squares together" 
-                    className="w-full h-auto object-cover"
-                  />
                 </div>
               </div>
 
