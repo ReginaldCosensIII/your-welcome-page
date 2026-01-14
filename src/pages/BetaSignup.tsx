@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { CheckCircle2, ArrowRight, Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import betaCommunityImage from "@/assets/beta-community.jpg";
 
 const betaPerks = [
   "Full access to all beta features",
@@ -42,12 +43,20 @@ export default function BetaSignup() {
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
               {/* Left Column - Info */}
               <div className="lg:sticky lg:top-28">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary border border-border mb-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary border border-border mb-6">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 gradient-bg"></span>
                   </span>
                   <span className="text-xs font-medium text-foreground">Limited Beta Spots</span>
+                </div>
+
+                <div className="mb-8 rounded-2xl overflow-hidden border border-border shadow-lg">
+                  <img 
+                    src={betaCommunityImage} 
+                    alt="Crafters collaborating on colorful blanket squares" 
+                    className="w-full h-auto object-cover"
+                  />
                 </div>
 
                 <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">
