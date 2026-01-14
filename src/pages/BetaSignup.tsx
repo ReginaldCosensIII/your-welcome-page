@@ -40,17 +40,20 @@ export default function BetaSignup() {
       <section className="py-16 lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
+            {/* Centered Badge */}
+            <div className="flex justify-center mb-10">
+              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-secondary border border-border transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_hsl(var(--accent)/0.3)]">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 gradient-bg"></span>
+                </span>
+                <span className="text-sm font-medium text-foreground">Limited Beta Spots</span>
+              </div>
+            </div>
+
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
               {/* Left Column - Info */}
               <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary border border-border mb-6">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 gradient-bg"></span>
-                  </span>
-                  <span className="text-xs font-medium text-foreground">Limited Beta Spots</span>
-                </div>
-
                 <div className="mb-8 rounded-2xl overflow-hidden border border-border shadow-lg">
                   <img 
                     src={betaCommunityImage} 
