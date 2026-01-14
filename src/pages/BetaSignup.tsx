@@ -42,12 +42,12 @@ export default function BetaSignup() {
           <div className="max-w-6xl mx-auto">
             {/* Centered Badge */}
             <div className="flex justify-center mb-10">
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-secondary border border-border transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_hsl(var(--accent)/0.3)]">
+              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-brand-midblue/10 border border-brand-purple/30 transition-all duration-300 ease-out hover:scale-110 hover:shadow-[0_0_20px_rgba(92,174,255,0.4)] hover:border-brand-midblue/50">
                 <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 gradient-bg"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-midblue opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-midblue"></span>
                 </span>
-                <span className="text-sm font-medium text-foreground">Limited Beta Spots</span>
+                <span className="text-sm font-medium text-brand-midblue">Limited Beta Spots</span>
               </div>
             </div>
 
