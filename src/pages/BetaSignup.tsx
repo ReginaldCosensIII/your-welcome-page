@@ -42,7 +42,7 @@ export default function BetaSignup() {
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
               {/* Left Column - Info */}
-              <div className="lg:sticky lg:top-28">
+              <div>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary border border-border mb-6">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
@@ -95,7 +95,7 @@ export default function BetaSignup() {
               </div>
 
               {/* Right Column - Form */}
-              <div>
+              <div className="lg:sticky lg:top-28">
                 {isSubmitted ? (
                   <div className="rounded-2xl border border-border bg-card p-8 lg:p-12 text-center">
                     <div className="w-16 h-16 mx-auto mb-6 rounded-full gradient-bg flex items-center justify-center">
