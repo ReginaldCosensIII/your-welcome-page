@@ -276,8 +276,8 @@ export default function Index() {
                   key={value.title}
                   className="text-center p-6"
                 >
-                  <div className="w-14 h-14 mx-auto rounded-full gradient-bg flex items-center justify-center mb-5">
-                    <value.icon className="w-7 h-7 text-primary-foreground" strokeWidth={1.5} />
+                  <div className="w-14 h-14 mx-auto rounded-full bg-brand-midblue/10 border border-brand-purple/30 flex items-center justify-center mb-5 hover:scale-110 hover:shadow-[0_0_20px_rgba(92,174,255,0.4)] hover:border-brand-midblue/50 transition-all duration-300 ease-out">
+                    <value.icon className="w-7 h-7 text-brand-midblue" strokeWidth={1.5} />
                   </div>
                   <h3 className="font-display text-xl font-semibold text-foreground mb-3">
                     {value.title}
