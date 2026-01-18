@@ -81,25 +81,25 @@ export function FeatureTourMockup() {
                   
                   {/* Tour Overlay */}
                   <div className="absolute inset-0 bg-background/60 backdrop-blur-sm flex flex-col items-center justify-center">
-                    <div className="text-center p-6 max-w-md">
-                      <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 sm:mb-6 rounded-full gradient-bg flex items-center justify-center shadow-lg">
-                        <Play className="w-8 h-8 sm:w-10 sm:h-10 text-primary-foreground ml-1" />
+                    <div className="text-center p-3 sm:p-6 max-w-[90%] sm:max-w-md">
+                      <div className="w-10 h-10 sm:w-16 sm:h-16 md:w-20 md:h-20 mx-auto mb-2 sm:mb-4 md:mb-6 rounded-full gradient-bg flex items-center justify-center shadow-lg">
+                        <Play className="w-5 h-5 sm:w-8 sm:h-8 md:w-10 md:h-10 text-primary-foreground ml-0.5" />
                       </div>
-                      <h3 className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-2 sm:mb-3">
+                      <h3 className="font-display text-sm sm:text-xl md:text-2xl lg:text-3xl font-bold text-foreground mb-1 sm:mb-2 md:mb-3">
                         Interactive Feature Tour
                       </h3>
-                      <p className="font-sans text-muted-foreground text-sm sm:text-base mb-4 sm:mb-6">
+                      <p className="font-sans text-muted-foreground text-xs sm:text-sm md:text-base mb-2 sm:mb-4 md:mb-6 leading-relaxed">
                         Take a guided walkthrough of BlanketSmith's powerful features and see how easy pattern creation can be.
                       </p>
                       <Button 
                         variant="gradient" 
-                        size="lg"
-                        className="pointer-events-none"
+                        size="sm"
+                        className="pointer-events-none sm:h-10 sm:px-5 md:h-12 md:px-8 text-xs sm:text-sm md:text-base"
                         disabled
                       >
-                        <Play className="w-4 h-4 mr-2" />
+                        <Play className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                         Start Tour
-                        <span className="ml-2 text-xs opacity-70">(Coming Soon)</span>
+                        <span className="ml-1 sm:ml-2 text-[10px] sm:text-xs opacity-70">(Coming Soon)</span>
                       </Button>
                     </div>
                   </div>
