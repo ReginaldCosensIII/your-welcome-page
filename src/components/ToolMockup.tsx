@@ -64,24 +64,24 @@ export function ToolMockup() {
               {/* Browser Top Bar - parallax layer */}
               <motion.div 
                 style={{ y: topBarY }}
-                className="bg-secondary/80 border-b border-border px-2 py-1.5 sm:px-3 sm:py-2 md:px-4 md:py-3 flex items-center gap-1.5 sm:gap-2 md:gap-3 relative z-10"
+                className="bg-secondary/80 border-b border-border px-1.5 py-1 sm:px-3 sm:py-2 md:px-4 md:py-3 flex items-center gap-1 sm:gap-2 md:gap-3 relative z-10"
               >
                 {/* Traffic Lights */}
-                <div className="flex items-center gap-1 sm:gap-1.5 md:gap-2">
-                  <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 rounded-full bg-red-400/80" />
-                  <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 rounded-full bg-yellow-400/80" />
-                  <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 rounded-full bg-green-400/80" />
+                <div className="flex items-center gap-0.5 sm:gap-1.5 md:gap-2">
+                  <div className="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 rounded-full bg-red-400/80" />
+                  <div className="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 rounded-full bg-yellow-400/80" />
+                  <div className="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 rounded-full bg-green-400/80" />
                 </div>
                 
                 {/* URL Bar */}
                 <div className="flex-1 max-w-md mx-auto">
-                  <div className="bg-background/60 rounded-md px-2 py-0.5 sm:px-3 sm:py-1 md:px-4 md:py-1.5 text-[10px] sm:text-xs md:text-sm text-muted-foreground text-center border border-border/50">
+                  <div className="bg-background/60 rounded px-1.5 py-0.5 sm:px-3 sm:py-1 md:px-4 md:py-1.5 text-[8px] sm:text-xs md:text-sm text-muted-foreground text-center border border-border/50">
                     app.blanketsmith.com
                   </div>
                 </div>
                 
                 {/* Spacer for symmetry */}
-                <div className="w-6 sm:w-10 md:w-14" />
+                <div className="w-4 sm:w-10 md:w-14" />
               </motion.div>
 
               {/* Screenshot - parallax layer with slight zoom */}
