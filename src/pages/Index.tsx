@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/layout/Layout";
 import { ToolMockup } from "@/components/ToolMockup";
 import { FeatureTourMockup } from "@/components/FeatureTourMockup";
-import { HeroBackground } from "@/components/HeroBackground";
 import logoBadge from "@/assets/logo-badge.svg";
 import communityCrafting from "@/assets/community-crafting.jpg";
 
@@ -76,7 +75,55 @@ export default function Index() {
       {/* Hero Section */}
       <section className="relative overflow-hidden min-h-screen flex flex-col">
         {/* Background Effects */}
-        <HeroBackground />
+        <div className="absolute inset-0 -z-10">
+          {/* Decorative blur orbs - symmetrical gradient orbs */}
+          <div className="absolute top-0 right-0 w-[280px] h-[280px] md:w-[400px] md:h-[400px] lg:w-[480px] lg:h-[480px] 3xl:w-[600px] 3xl:h-[600px] opacity-20 lg:opacity-25 blur-3xl rounded-full gradient-bg transform translate-x-[22%] -translate-y-[28%] 3xl:translate-x-[15%] 3xl:-translate-y-[20%]" />
+          <div className="absolute bottom-0 left-0 w-[260px] h-[260px] md:w-[380px] md:h-[380px] lg:w-[450px] lg:h-[450px] 3xl:w-[580px] 3xl:h-[580px] opacity-20 lg:opacity-25 blur-3xl rounded-full gradient-bg transform -translate-x-[30%] translate-y-[32%] 3xl:-translate-x-[20%] 3xl:translate-y-[22%]" />
+          {/* Cyan accent orbs in opposite corners */}
+          <div className="hidden md:block absolute top-0 left-0 w-[450px] h-[450px] lg:w-[550px] lg:h-[550px] 3xl:w-[700px] 3xl:h-[700px] blur-3xl rounded-full accent-orb transform -translate-x-[24%] -translate-y-[26%] 3xl:-translate-x-[18%] 3xl:-translate-y-[18%]" />
+          <div className="hidden md:block absolute bottom-0 right-0 w-[380px] h-[380px] lg:w-[450px] lg:h-[450px] 3xl:w-[580px] 3xl:h-[580px] blur-3xl rounded-full accent-orb transform translate-x-[32%] translate-y-[30%] 3xl:translate-x-[22%] 3xl:translate-y-[20%]" />
+          
+          {/* Graph paper texture with grid */}
+          <div
+            className="absolute inset-0 opacity-[0.025] md:opacity-[0.03] lg:opacity-[0.05] mix-blend-multiply"
+            style={{
+              backgroundImage: `
+                linear-gradient(to right, hsl(var(--muted-foreground)) 1px, transparent 1px),
+                linear-gradient(to bottom, hsl(var(--muted-foreground)) 1px, transparent 1px)
+              `,
+              backgroundSize: "30px 30px",
+            }}
+          />
+
+          {/* Red crosshair guidelines pointing to content - desktop only */}
+          <div className="hidden lg:block absolute inset-0 pointer-events-none">
+            {/* Vertical dashed line */}
+            <div
+              className="absolute left-1/2 top-0 bottom-0 w-0 -translate-x-1/2 border-l-2 border-dashed opacity-[0.08]"
+              style={{ borderColor: "hsl(340, 82%, 52%)" }}
+            />
+            {/* Horizontal dashed line - positioned at content center */}
+            <div
+              className="absolute top-1/2 left-0 right-0 h-0 -translate-y-1/2 border-t-2 border-dashed opacity-[0.08]"
+              style={{ borderColor: "hsl(340, 82%, 52%)" }}
+            />
+          </div>
+
+          {/* Tablet crosshair - more subtle */}
+          <div className="hidden md:block lg:hidden absolute inset-0 pointer-events-none">
+            <div
+              className="absolute left-1/2 top-0 bottom-0 w-0 -translate-x-1/2 border-l border-dashed opacity-[0.05]"
+              style={{ borderColor: "hsl(340, 82%, 52%)" }}
+            />
+            <div
+              className="absolute top-1/2 left-0 right-0 h-0 -translate-y-1/2 border-t border-dashed opacity-[0.05]"
+              style={{ borderColor: "hsl(340, 82%, 52%)" }}
+            />
+          </div>
+
+          {/* White radial gradient behind content for readability */}
+          <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,hsl(var(--background)/0.9),transparent_60%)] md:bg-[radial-gradient(ellipse_50%_40%_at_50%_50%,hsl(var(--background)/0.85),transparent_55%)] 3xl:bg-[radial-gradient(ellipse_35%_45%_at_50%_50%,hsl(var(--background)/0.9),transparent_50%)]" />
+        </div>
 
         {/* Beta Badge - Fixed at top */}
         <div className="pt-6 pb-2 text-center animate-fade-in">
