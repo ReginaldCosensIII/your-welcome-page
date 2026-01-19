@@ -20,10 +20,6 @@ export function FeatureTourMockup() {
   
   // Shadow animation
   const shadowOpacity = useTransform(scrollYProgress, [0, 0.6], [0, 1]);
-  
-  // Tour overlay fade-in animation (appears later in the scroll)
-  const overlayOpacity = useTransform(scrollYProgress, [0.5, 0.85], [0, 1]);
-  const overlayScale = useTransform(scrollYProgress, [0.5, 0.85], [0.95, 1]);
 
   return (
 <div className="mt-8 lg:mt-12 overflow-hidden">
@@ -83,11 +79,8 @@ export function FeatureTourMockup() {
                     className="w-full h-auto block"
                   />
                   
-                  {/* Tour Overlay with fade-in animation */}
-                  <motion.div 
-                    style={{ opacity: overlayOpacity, scale: overlayScale }}
-                    className="absolute inset-0 bg-background/60 backdrop-blur-sm flex flex-col items-center justify-center origin-center"
-                  >
+                  {/* Tour Overlay */}
+                  <div className="absolute inset-0 bg-background/60 backdrop-blur-sm flex flex-col items-center justify-center">
                     <div className="text-center p-3 sm:p-6 max-w-[90%] sm:max-w-md">
                       <div className="w-10 h-10 sm:w-16 sm:h-16 md:w-20 md:h-20 mx-auto mb-2 sm:mb-4 md:mb-6 rounded-full gradient-bg flex items-center justify-center shadow-lg">
                         <Play className="w-5 h-5 sm:w-8 sm:h-8 md:w-10 md:h-10 text-primary-foreground ml-0.5" />
@@ -109,7 +102,7 @@ export function FeatureTourMockup() {
                         <span className="ml-1 sm:ml-2 text-[10px] sm:text-xs opacity-70">(Coming Soon)</span>
                       </Button>
                     </div>
-                  </motion.div>
+                  </div>
                   
                   {/* Subtle gradient overlay at bottom */}
                   <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-card/50 to-transparent pointer-events-none" />
