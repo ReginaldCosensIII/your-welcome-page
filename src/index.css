@@ -140,41 +140,6 @@
     );
   }
 
-  /* Orb glow pulse animation */
-  @keyframes orb-pulse {
-    0%, 100% {
-      opacity: var(--orb-opacity-base);
-      transform: var(--orb-transform) scale(1);
-    }
-    50% {
-      opacity: var(--orb-opacity-peak);
-      transform: var(--orb-transform) scale(1.05);
-    }
-  }
-
-  .orb-animated {
-    --orb-opacity-base: 0.20;
-    --orb-opacity-peak: 0.28;
-    animation: orb-pulse 4s ease-in-out infinite;
-    transition: opacity 0.5s ease, transform 0.5s ease, filter 0.5s ease;
-  }
-
-  .orb-animated.orb-lg {
-    --orb-opacity-base: 0.25;
-    --orb-opacity-peak: 0.35;
-  }
-
-  .orb-container:hover .orb-animated {
-    --orb-opacity-base: 0.35;
-    --orb-opacity-peak: 0.5;
-    filter: blur(2.5rem) brightness(1.15);
-  }
-
-  .orb-container:hover .orb-animated.orb-lg {
-    --orb-opacity-base: 0.4;
-    --orb-opacity-peak: 0.55;
-  }
-
   .gradient-border {
     position: relative;
     background: var(--gradient-brand);

@@ -75,25 +75,13 @@ export default function Index() {
       {/* Hero Section */}
       <section className="relative overflow-hidden min-h-screen flex flex-col">
         {/* Background Effects */}
-        <div className="absolute inset-0 -z-10 orb-container">
+        <div className="absolute inset-0 -z-10">
           {/* Decorative blur orbs - symmetrical gradient orbs */}
-          <div 
-            className="absolute top-0 right-0 w-[280px] h-[280px] md:w-[400px] md:h-[400px] lg:w-[480px] lg:h-[480px] 3xl:w-[600px] 3xl:h-[600px] blur-3xl rounded-full gradient-bg orb-animated lg:orb-lg"
-            style={{ '--orb-transform': 'translate(22%, -28%)' } as React.CSSProperties}
-          />
-          <div 
-            className="absolute bottom-0 left-0 w-[260px] h-[260px] md:w-[380px] md:h-[380px] lg:w-[450px] lg:h-[450px] 3xl:w-[580px] 3xl:h-[580px] blur-3xl rounded-full gradient-bg orb-animated lg:orb-lg"
-            style={{ '--orb-transform': 'translate(-30%, 32%)', animationDelay: '1s' } as React.CSSProperties}
-          />
+          <div className="absolute top-0 right-0 w-[280px] h-[280px] md:w-[400px] md:h-[400px] lg:w-[480px] lg:h-[480px] 3xl:w-[600px] 3xl:h-[600px] opacity-20 lg:opacity-25 blur-3xl rounded-full gradient-bg transform translate-x-[22%] -translate-y-[28%] 3xl:translate-x-[15%] 3xl:-translate-y-[20%]" />
+          <div className="absolute bottom-0 left-0 w-[260px] h-[260px] md:w-[380px] md:h-[380px] lg:w-[450px] lg:h-[450px] 3xl:w-[580px] 3xl:h-[580px] opacity-20 lg:opacity-25 blur-3xl rounded-full gradient-bg transform -translate-x-[30%] translate-y-[32%] 3xl:-translate-x-[20%] 3xl:translate-y-[22%]" />
           {/* Cyan accent orbs in opposite corners */}
-          <div 
-            className="hidden md:block absolute top-0 left-0 w-[450px] h-[450px] lg:w-[550px] lg:h-[550px] 3xl:w-[700px] 3xl:h-[700px] blur-3xl rounded-full accent-orb orb-animated lg:orb-lg"
-            style={{ '--orb-transform': 'translate(-24%, -26%)', animationDelay: '2s' } as React.CSSProperties}
-          />
-          <div 
-            className="hidden md:block absolute bottom-0 right-0 w-[380px] h-[380px] lg:w-[450px] lg:h-[450px] 3xl:w-[580px] 3xl:h-[580px] blur-3xl rounded-full accent-orb orb-animated lg:orb-lg"
-            style={{ '--orb-transform': 'translate(32%, 30%)', animationDelay: '3s' } as React.CSSProperties}
-          />
+          <div className="hidden md:block absolute top-0 left-0 w-[450px] h-[450px] lg:w-[550px] lg:h-[550px] 3xl:w-[700px] 3xl:h-[700px] blur-3xl rounded-full accent-orb transform -translate-x-[24%] -translate-y-[26%] 3xl:-translate-x-[18%] 3xl:-translate-y-[18%]" />
+          <div className="hidden md:block absolute bottom-0 right-0 w-[380px] h-[380px] lg:w-[450px] lg:h-[450px] 3xl:w-[580px] 3xl:h-[580px] blur-3xl rounded-full accent-orb transform translate-x-[32%] translate-y-[30%] 3xl:translate-x-[22%] 3xl:translate-y-[20%]" />
           
           {/* Graph paper texture with grid */}
           <div
