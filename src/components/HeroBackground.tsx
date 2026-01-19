@@ -14,11 +14,11 @@ function InteractiveOrb({
   className, 
   mouseX, 
   mouseY, 
-  sensitivity = 0.02,
+  sensitivity = 0.05,
   floatDuration = 6,
-  floatDistance = 15
+  floatDistance = 25
 }: OrbProps) {
-  const springConfig = { stiffness: 50, damping: 30 };
+  const springConfig = { stiffness: 80, damping: 20 };
   
   const x = useSpring(useTransform(mouseX, (v) => v * sensitivity), springConfig);
   const y = useSpring(useTransform(mouseY, (v) => v * sensitivity), springConfig);
@@ -43,8 +43,8 @@ function InteractiveOrb({
 function StaticOrb({ 
   className, 
   floatDuration = 6,
-  floatDistance = 10
-}: { 
+  floatDistance = 18
+}: {
   className: string;
   floatDuration?: number;
   floatDistance?: number;
@@ -106,52 +106,52 @@ export function HeroBackground() {
       {isMobile ? (
         <>
           <StaticOrb 
-            className="absolute top-0 right-0 w-[280px] h-[280px] opacity-20 blur-3xl rounded-full gradient-bg transform translate-x-[22%] -translate-y-[28%]"
-            floatDuration={8}
-            floatDistance={12}
+            className="absolute top-0 right-0 w-[280px] h-[280px] opacity-25 blur-3xl rounded-full gradient-bg transform translate-x-[45%] -translate-y-[45%]"
+            floatDuration={7}
+            floatDistance={20}
           />
           <StaticOrb 
-            className="absolute bottom-0 left-0 w-[260px] h-[260px] opacity-20 blur-3xl rounded-full gradient-bg transform -translate-x-[30%] translate-y-[32%]"
-            floatDuration={10}
-            floatDistance={10}
+            className="absolute bottom-0 left-0 w-[260px] h-[260px] opacity-25 blur-3xl rounded-full gradient-bg transform -translate-x-[45%] translate-y-[45%]"
+            floatDuration={9}
+            floatDistance={18}
           />
         </>
       ) : (
         <>
-          {/* Primary gradient orbs with mouse interaction */}
+          {/* Primary gradient orbs with mouse interaction - pushed to corners */}
           <InteractiveOrb
-            className="absolute top-0 right-0 w-[280px] h-[280px] md:w-[400px] md:h-[400px] lg:w-[480px] lg:h-[480px] 3xl:w-[600px] 3xl:h-[600px] opacity-20 lg:opacity-25 blur-3xl rounded-full gradient-bg transform translate-x-[22%] -translate-y-[28%] 3xl:translate-x-[15%] 3xl:-translate-y-[20%]"
+            className="absolute top-0 right-0 w-[280px] h-[280px] md:w-[400px] md:h-[400px] lg:w-[480px] lg:h-[480px] 3xl:w-[600px] 3xl:h-[600px] opacity-25 lg:opacity-30 blur-3xl rounded-full gradient-bg transform translate-x-[40%] -translate-y-[40%] 3xl:translate-x-[35%] 3xl:-translate-y-[35%]"
             mouseX={mouseX}
             mouseY={mouseY}
-            sensitivity={0.03}
-            floatDuration={8}
-            floatDistance={18}
+            sensitivity={0.08}
+            floatDuration={6}
+            floatDistance={35}
           />
           <InteractiveOrb
-            className="absolute bottom-0 left-0 w-[260px] h-[260px] md:w-[380px] md:h-[380px] lg:w-[450px] lg:h-[450px] 3xl:w-[580px] 3xl:h-[580px] opacity-20 lg:opacity-25 blur-3xl rounded-full gradient-bg transform -translate-x-[30%] translate-y-[32%] 3xl:-translate-x-[20%] 3xl:translate-y-[22%]"
+            className="absolute bottom-0 left-0 w-[260px] h-[260px] md:w-[380px] md:h-[380px] lg:w-[450px] lg:h-[450px] 3xl:w-[580px] 3xl:h-[580px] opacity-25 lg:opacity-30 blur-3xl rounded-full gradient-bg transform -translate-x-[45%] translate-y-[45%] 3xl:-translate-x-[38%] 3xl:translate-y-[38%]"
             mouseX={mouseX}
             mouseY={mouseY}
-            sensitivity={-0.025}
-            floatDuration={10}
-            floatDistance={15}
+            sensitivity={-0.07}
+            floatDuration={7}
+            floatDistance={30}
           />
           
           {/* Cyan accent orbs in opposite corners */}
           <InteractiveOrb
-            className="absolute top-0 left-0 w-[450px] h-[450px] lg:w-[550px] lg:h-[550px] 3xl:w-[700px] 3xl:h-[700px] blur-3xl rounded-full accent-orb transform -translate-x-[24%] -translate-y-[26%] 3xl:-translate-x-[18%] 3xl:-translate-y-[18%]"
+            className="absolute top-0 left-0 w-[450px] h-[450px] lg:w-[550px] lg:h-[550px] 3xl:w-[700px] 3xl:h-[700px] blur-3xl rounded-full accent-orb transform -translate-x-[42%] -translate-y-[42%] 3xl:-translate-x-[35%] 3xl:-translate-y-[35%]"
             mouseX={mouseX}
             mouseY={mouseY}
-            sensitivity={-0.02}
-            floatDuration={12}
-            floatDistance={20}
+            sensitivity={-0.06}
+            floatDuration={8}
+            floatDistance={40}
           />
           <InteractiveOrb
-            className="absolute bottom-0 right-0 w-[380px] h-[380px] lg:w-[450px] lg:h-[450px] 3xl:w-[580px] 3xl:h-[580px] blur-3xl rounded-full accent-orb transform translate-x-[32%] translate-y-[30%] 3xl:translate-x-[22%] 3xl:translate-y-[20%]"
+            className="absolute bottom-0 right-0 w-[380px] h-[380px] lg:w-[450px] lg:h-[450px] 3xl:w-[580px] 3xl:h-[580px] blur-3xl rounded-full accent-orb transform translate-x-[48%] translate-y-[48%] 3xl:translate-x-[40%] 3xl:translate-y-[40%]"
             mouseX={mouseX}
             mouseY={mouseY}
-            sensitivity={0.02}
-            floatDuration={9}
-            floatDistance={16}
+            sensitivity={0.065}
+            floatDuration={7.5}
+            floatDistance={32}
           />
         </>
       )}
