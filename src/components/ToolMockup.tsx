@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import heroScreenshot from "@/assets/hero-screenshot.png";
+import betaUIScreenshot from "@/assets/beta-ui-screenshot.png";
 
 export function ToolMockup() {
   const ref = useRef(null);
@@ -90,7 +90,7 @@ export function ToolMockup() {
                 className="relative bg-background origin-top"
               >
                 <img 
-                  src={heroScreenshot} 
+                  src={betaUIScreenshot} 
                   alt="BlanketSmith Pattern Tool Interface" 
                   className="w-full h-auto block"
                 />
