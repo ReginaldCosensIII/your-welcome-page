@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
+import { GridBackground } from "@/components/GridBackground";
 import { Home, ArrowLeft } from "lucide-react";
 
 const NotFound = () => {
@@ -13,7 +14,8 @@ const NotFound = () => {
 
   return (
     <Layout>
-      <section className="py-20 lg:py-32">
+      <section className="relative py-20 lg:py-32">
+        <GridBackground />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-lg mx-auto text-center">
             <div className="w-20 h-20 mx-auto mb-8 rounded-2xl gradient-bg flex items-center justify-center">
