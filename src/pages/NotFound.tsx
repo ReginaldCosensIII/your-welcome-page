@@ -36,7 +36,11 @@ const NotFound = () => {
                   Back to Home
                 </Link>
               </Button>
-              <Button variant="outline" size="lg" onClick={() => window.history.back()}>
+              <Button 
+                size="lg" 
+                className="bg-background text-foreground hover:bg-background/90 hover:scale-[1.02] active:scale-[0.98] shadow-lg border border-border"
+                onClick={() => window.history.back()}
+              >
                 <ArrowLeft className="w-4 h-4" />
                 Go Back
               </Button>
