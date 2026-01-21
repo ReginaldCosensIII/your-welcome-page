@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Bug, Lightbulb, MessageSquare, CheckCircle2, ArrowRight } from "lucide-react";
+import { Bug, Lightbulb, MessageSquare, CheckCircle2, ArrowRight, Home } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const feedbackTypes = [
@@ -70,12 +70,21 @@ export default function Feedback() {
                 Your input helps us build a better tool for the maker community. 
                 We review every submission and will follow up if we need more details.
               </p>
-              <Button 
-                variant="outline" 
-                onClick={() => setIsSubmitted(false)}
-              >
-                Submit more feedback
-              </Button>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Button variant="gradient" size="lg" asChild>
+                  <a href="/">
+                    <Home className="w-4 h-4" />
+                    Back to Home
+                  </a>
+                </Button>
+                <Button 
+                  size="lg"
+                  className="bg-background text-foreground hover:bg-background/90 hover:scale-[1.02] active:scale-[0.98] shadow-lg border border-border"
+                  onClick={() => setIsSubmitted(false)}
+                >
+                  Submit more feedback
+                </Button>
+              </div>
             </div>
           </div>
         </section>

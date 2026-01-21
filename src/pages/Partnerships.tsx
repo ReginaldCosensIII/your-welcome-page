@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Store, Users, Palette, CheckCircle2, ArrowRight } from "lucide-react";
+import { Store, Users, Palette, CheckCircle2, ArrowRight, Home } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const partnerTypes = [
@@ -71,12 +71,21 @@ export default function Partnerships() {
                 potential collaboration. Our team will review your submission and 
                 respond within 3-5 business days.
               </p>
-              <Button 
-                variant="outline" 
-                onClick={() => setIsSubmitted(false)}
-              >
-                Submit another inquiry
-              </Button>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Button variant="gradient" size="lg" asChild>
+                  <a href="/">
+                    <Home className="w-4 h-4" />
+                    Back to Home
+                  </a>
+                </Button>
+                <Button 
+                  size="lg"
+                  className="bg-background text-foreground hover:bg-background/90 hover:scale-[1.02] active:scale-[0.98] shadow-lg border border-border"
+                  onClick={() => setIsSubmitted(false)}
+                >
+                  Submit another inquiry
+                </Button>
+              </div>
             </div>
           </div>
         </section>
