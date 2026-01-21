@@ -54,8 +54,8 @@ export default function Feedback() {
         <section className="py-16 lg:py-24">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-xl mx-auto text-center">
-              <div className="w-16 h-16 mx-auto mb-6 rounded-full gradient-bg flex items-center justify-center">
-                <CheckCircle2 className="w-8 h-8 text-primary-foreground" />
+              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-brand-midblue/10 to-brand-cyan/10 border border-brand-purple/30 flex items-center justify-center shadow-[0_0_20px_rgba(92,174,255,0.4)]">
+                <CheckCircle2 className="w-8 h-8 text-brand-midblue" />
               </div>
               <h1 className="font-display text-3xl font-bold text-foreground mb-4">
                 Thank you for your feedback!
@@ -100,18 +100,18 @@ export default function Feedback() {
                   key={type.id}
                   type="button"
                   onClick={() => setSelectedType(type.id)}
-                  className={`p-5 rounded-xl border text-left transition-all ${
+                  className={`group p-5 rounded-xl border text-left transition-all ${
                     selectedType === type.id
                       ? "border-primary bg-primary/5 ring-2 ring-primary/20"
                       : "border-border bg-card hover:border-primary/30"
                   }`}
                 >
-                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-3 ${
-                    selectedType === type.id ? "gradient-bg" : "bg-secondary"
+                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-3 bg-gradient-to-br from-brand-midblue/10 to-brand-cyan/10 transition-all duration-300 ease-out ${
+                    selectedType === type.id 
+                      ? "border-2 border-brand-purple shadow-[0_0_20px_rgba(92,174,255,0.4)]" 
+                      : "border border-brand-purple/30 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(92,174,255,0.4)] group-hover:border-brand-midblue/50"
                   }`}>
-                    <type.icon className={`w-5 h-5 ${
-                      selectedType === type.id ? "text-primary-foreground" : "text-foreground"
-                    }`} />
+                    <type.icon className="w-5 h-5 text-brand-midblue" />
                   </div>
                   <h3 className="font-medium text-foreground mb-1">{type.title}</h3>
                   <p className="text-xs text-muted-foreground">{type.description}</p>

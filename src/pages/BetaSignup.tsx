@@ -82,8 +82,8 @@ export default function BetaSignup() {
 
                 <div className="p-6 rounded-2xl bg-secondary/50 border border-border">
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center flex-shrink-0">
-                      <Sparkles className="w-5 h-5 text-primary-foreground" />
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-midblue/10 to-brand-cyan/10 border border-brand-purple/30 flex items-center justify-center flex-shrink-0 shadow-[0_0_20px_rgba(92,174,255,0.4)]">
+                      <Sparkles className="w-5 h-5 text-brand-midblue" />
                     </div>
                     <div>
                       <p className="font-medium text-foreground mb-1">What to expect</p>
@@ -101,8 +101,8 @@ export default function BetaSignup() {
               <div className="lg:sticky lg:top-28">
                 {isSubmitted ? (
                   <div className="rounded-2xl border border-border bg-card p-8 lg:p-12 text-center">
-                    <div className="w-16 h-16 mx-auto mb-6 rounded-full gradient-bg flex items-center justify-center">
-                      <CheckCircle2 className="w-8 h-8 text-primary-foreground" />
+                    <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-brand-midblue/10 to-brand-cyan/10 border border-brand-purple/30 flex items-center justify-center shadow-[0_0_20px_rgba(92,174,255,0.4)]">
+                      <CheckCircle2 className="w-8 h-8 text-brand-midblue" />
                     </div>
                     <h2 className="font-display text-2xl font-bold text-foreground mb-4">
                       You're on the list!
