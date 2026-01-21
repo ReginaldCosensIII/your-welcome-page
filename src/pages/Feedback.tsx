@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { GridBackground } from "@/components/GridBackground";
 import { Bug, Lightbulb, MessageSquare, CheckCircle2, ArrowRight, Home } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -52,8 +53,9 @@ export default function Feedback() {
   if (isSubmitted) {
     return (
       <Layout>
-        <section className="py-16 lg:py-24">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="relative py-16 lg:py-24">
+          <GridBackground />
+          <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-xl mx-auto text-center">
               <motion.div 
                 initial={{ scale: 0, opacity: 0 }}
@@ -94,8 +96,9 @@ export default function Feedback() {
 
   return (
     <Layout>
-      <section className="py-16 lg:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-16 lg:py-24">
+        <GridBackground />
+        <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto">
             {/* Header */}
             <div className="text-center mb-12">
