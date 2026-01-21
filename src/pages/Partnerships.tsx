@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { GridBackground } from "@/components/GridBackground";
 import { Store, Users, Palette, CheckCircle2, ArrowRight, Home } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -53,9 +52,8 @@ export default function Partnerships() {
   if (isSubmitted) {
     return (
       <Layout>
-        <section className="relative py-16 lg:py-24">
-          <GridBackground />
-          <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-16 lg:py-24">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-xl mx-auto text-center">
               <motion.div 
                 initial={{ scale: 0, opacity: 0 }}
@@ -97,9 +95,8 @@ export default function Partnerships() {
 
   return (
     <Layout>
-      <section className="relative py-16 lg:py-24">
-        <GridBackground />
-        <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 lg:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             {/* Header */}
             <div className="text-center mb-12">
