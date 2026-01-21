@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -101,9 +102,14 @@ export default function BetaSignup() {
               <div className="lg:sticky lg:top-28">
                 {isSubmitted ? (
                   <div className="rounded-2xl border border-border bg-card p-8 lg:p-12 text-center">
-                    <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-brand-purple via-brand-midblue to-brand-cyan flex items-center justify-center">
+                    <motion.div 
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.1 }}
+                      className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-brand-purple via-brand-midblue to-brand-cyan flex items-center justify-center"
+                    >
                       <CheckCircle2 className="w-8 h-8 text-white" />
-                    </div>
+                    </motion.div>
                     <h2 className="font-display text-2xl font-bold text-foreground mb-4">
                       You're on the list!
                     </h2>
