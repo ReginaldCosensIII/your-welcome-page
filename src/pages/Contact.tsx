@@ -52,8 +52,9 @@ export default function Contact() {
   if (isSubmitted) {
     return (
       <Layout>
-        <section className="py-16 lg:py-24">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-16 lg:py-24 relative">
+          <div className="absolute inset-0 radial-gradient-wash pointer-events-none" aria-hidden="true" />
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
             <div className="max-w-xl mx-auto text-center">
               <motion.div 
                 initial={{ scale: 0, opacity: 0 }}
@@ -94,8 +95,9 @@ export default function Contact() {
 
   return (
     <Layout>
-      <section className="py-16 lg:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 lg:py-24 relative">
+        <div className="absolute inset-0 radial-gradient-wash pointer-events-none" aria-hidden="true" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="max-w-3xl mx-auto">
             {/* Header */}
             <div className="text-center mb-12">

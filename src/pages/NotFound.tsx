@@ -13,8 +13,9 @@ const NotFound = () => {
 
   return (
     <Layout>
-      <section className="py-20 lg:py-32">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 lg:py-32 relative">
+        <div className="absolute inset-0 radial-gradient-wash pointer-events-none" aria-hidden="true" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="max-w-lg mx-auto text-center">
             <div className="w-20 h-20 mx-auto mb-8 rounded-2xl gradient-bg flex items-center justify-center">
               <span className="text-3xl font-display font-bold text-primary-foreground">404</span>

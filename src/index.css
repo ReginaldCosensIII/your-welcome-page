@@ -126,6 +126,15 @@
     background-clip: text;
   }
 
+  .radial-gradient-wash {
+    background: radial-gradient(
+      ellipse at 50% 0%,
+      hsl(var(--brand-purple) / 0.08) 0%,
+      hsl(var(--brand-cyan) / 0.04) 40%,
+      transparent 70%
+    );
+  }
+
   .gradient-bg {
     background: var(--gradient-brand);
   }
