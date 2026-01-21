@@ -54,8 +54,8 @@ export default function Contact() {
         <section className="py-16 lg:py-24">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-xl mx-auto text-center">
-              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-brand-midblue/10 to-brand-cyan/10 border border-brand-purple/30 flex items-center justify-center shadow-[0_0_20px_rgba(92,174,255,0.4)]">
-                <CheckCircle2 className="w-8 h-8 text-brand-midblue" />
+              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-brand-purple via-brand-midblue to-brand-cyan flex items-center justify-center">
+                <CheckCircle2 className="w-8 h-8 text-white" />
               </div>
               <h1 className="font-display text-3xl font-bold text-foreground mb-4">
                 Message received!
