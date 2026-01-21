@@ -106,12 +106,12 @@ export default function Feedback() {
                       : "border-border bg-card hover:border-primary/30"
                   }`}
                 >
-                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-3 bg-gradient-to-br from-brand-midblue/10 to-brand-cyan/10 transition-all duration-300 ease-out ${
+                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-all duration-300 ease-out ${
                     selectedType === type.id 
-                      ? "border-2 border-brand-purple shadow-[0_0_20px_rgba(92,174,255,0.4)]" 
-                      : "border border-brand-purple/30 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(92,174,255,0.4)] group-hover:border-brand-midblue/50"
+                      ? "bg-gradient-to-br from-brand-purple via-brand-midblue to-brand-cyan" 
+                      : "bg-gradient-to-br from-brand-midblue/10 to-brand-cyan/10 border border-brand-purple/30 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(92,174,255,0.4)] group-hover:border-brand-midblue/50"
                   }`}>
-                    <type.icon className="w-5 h-5 text-brand-midblue" />
+                    <type.icon className={`w-5 h-5 ${selectedType === type.id ? "text-white" : "text-brand-midblue"}`} />
                   </div>
                   <h3 className="font-medium text-foreground mb-1">{type.title}</h3>
                   <p className="text-xs text-muted-foreground">{type.description}</p>
