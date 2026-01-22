@@ -55,7 +55,12 @@ export default function Partnerships() {
         <section className="py-16 lg:py-24 relative">
           <div className="absolute inset-0 radial-gradient-wash pointer-events-none" aria-hidden="true" />
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-            <div className="max-w-xl mx-auto text-center">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="max-w-xl mx-auto text-center"
+            >
               <motion.div 
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
@@ -87,7 +92,7 @@ export default function Partnerships() {
                   Submit another inquiry
                 </Button>
               </div>
-            </div>
+            </motion.div>
           </div>
         </section>
       </Layout>
@@ -99,7 +104,12 @@ export default function Partnerships() {
       <section className="py-16 lg:py-24 relative">
         <div className="absolute inset-0 radial-gradient-wash pointer-events-none" aria-hidden="true" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="max-w-4xl mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="max-w-4xl mx-auto"
+          >
             {/* Header */}
             <div className="text-center mb-12">
               <h1 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">
@@ -244,7 +254,7 @@ export default function Partnerships() {
                 We typically respond to partnership inquiries within 3-5 business days.
               </p>
             </form>
-          </div>
+          </motion.div>
         </div>
       </section>
     </Layout>

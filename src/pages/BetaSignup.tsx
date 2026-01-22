@@ -41,7 +41,12 @@ export default function BetaSignup() {
       <section className="pt-6 pb-16 lg:pt-8 lg:pb-24 relative">
         <div className="absolute inset-0 radial-gradient-wash pointer-events-none" aria-hidden="true" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="max-w-6xl mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="max-w-6xl mx-auto"
+          >
             {/* Centered Badge */}
             <div className="flex justify-center mb-10">
               <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-brand-midblue/10 border border-brand-purple/30 transition-all duration-300 ease-out hover:scale-110 hover:shadow-[0_0_20px_rgba(92,174,255,0.4)] hover:border-brand-midblue/50">
@@ -233,7 +238,7 @@ export default function BetaSignup() {
                 )}
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </Layout>

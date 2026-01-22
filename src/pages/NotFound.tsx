@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { motion } from "framer-motion";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Home, ArrowLeft } from "lucide-react";
@@ -16,7 +17,12 @@ const NotFound = () => {
       <section className="py-20 lg:py-32 relative">
         <div className="absolute inset-0 radial-gradient-wash pointer-events-none" aria-hidden="true" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="max-w-lg mx-auto text-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="max-w-lg mx-auto text-center"
+          >
             <div className="w-20 h-20 mx-auto mb-8 rounded-2xl gradient-bg flex items-center justify-center">
               <span className="text-3xl font-display font-bold text-primary-foreground">404</span>
             </div>
@@ -46,7 +52,7 @@ const NotFound = () => {
                 Go Back
               </Button>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </Layout>
