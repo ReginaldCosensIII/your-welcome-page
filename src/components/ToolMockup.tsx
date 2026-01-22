@@ -39,8 +39,7 @@ export function ToolMockup() {
   return (
     <div 
       ref={containerRef}
-      className="relative mt-8 lg:mt-10"
-      style={{ height: "200vh" }} // Scroll-locked animation container
+      className="relative mt-8 lg:mt-10 h-[150vh] sm:h-[175vh] lg:h-[200vh]" // Responsive scroll-locked container
     >
       {/* Sticky container - stays in view while scrolling drives animations */}
       <div className="sticky top-0 h-screen flex flex-col items-center justify-start overflow-hidden pt-6 pb-8 lg:pt-8 lg:pb-12">
@@ -76,24 +75,24 @@ export function ToolMockup() {
                 {/* Browser Top Bar */}
                 <motion.div 
                   style={{ y: topBarY }}
-                  className="bg-secondary/80 border-b border-border px-1.5 py-1 sm:px-3 sm:py-2 md:px-4 md:py-3 flex items-center gap-1 sm:gap-2 md:gap-3 relative z-10"
+                  className="bg-secondary/80 border-b border-border px-1 py-0.5 sm:px-3 sm:py-2 md:px-4 md:py-3 flex items-center gap-0.5 sm:gap-2 md:gap-3 relative z-10"
                 >
-                  {/* Traffic Lights */}
-                  <div className="flex items-center gap-0.5 sm:gap-1.5 md:gap-2">
-                    <div className="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 rounded-full bg-red-400/80" />
-                    <div className="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 rounded-full bg-yellow-400/80" />
-                    <div className="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 rounded-full bg-green-400/80" />
+                  {/* Traffic Lights - ultra compact on mobile */}
+                  <div className="flex items-center gap-[2px] sm:gap-1.5 md:gap-2">
+                    <div className="w-1 h-1 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 rounded-full bg-red-400/80" />
+                    <div className="w-1 h-1 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 rounded-full bg-yellow-400/80" />
+                    <div className="w-1 h-1 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 rounded-full bg-green-400/80" />
                   </div>
                   
-                  {/* URL Bar */}
+                  {/* URL Bar - smaller on mobile */}
                   <div className="flex-1 max-w-md mx-auto">
-                    <div className="bg-background/60 rounded px-1.5 py-0.5 sm:px-3 sm:py-1 md:px-4 md:py-1.5 text-[8px] sm:text-xs md:text-sm text-muted-foreground text-center border border-border/50">
+                    <div className="bg-background/60 rounded px-1 py-[2px] sm:px-3 sm:py-1 md:px-4 md:py-1.5 text-[6px] sm:text-xs md:text-sm text-muted-foreground text-center border border-border/50">
                       app.blanketsmith.com
                     </div>
                   </div>
                   
                   {/* Spacer for symmetry */}
-                  <div className="w-4 sm:w-10 md:w-14" />
+                  <div className="w-3 sm:w-10 md:w-14" />
                 </motion.div>
 
                 {/* Screenshot */}
