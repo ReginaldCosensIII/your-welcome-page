@@ -29,6 +29,26 @@ const contactReasons = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] as const }
+  },
+};
+
 export default function Contact() {
   const [selectedReason, setSelectedReason] = useState<string>("general");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -147,76 +167,79 @@ export default function Contact() {
             </div>
 
             {/* Form */}
-            <form 
+            <motion.form 
               onSubmit={handleSubmit}
               className="rounded-2xl border border-border bg-card p-8"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
             >
-              <div className="space-y-5">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Your name</Label>
-                    <Input 
-                      id="name" 
-                      placeholder="Jane Maker" 
-                      required 
-                      maxLength={100}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email address</Label>
-                    <Input 
-                      id="email" 
-                      type="email" 
-                      placeholder="jane@example.com" 
-                      required 
-                      maxLength={255}
-                    />
-                  </div>
-                </div>
-
+              <motion.div variants={itemVariants} className="grid sm:grid-cols-2 gap-4 mb-5">
                 <div className="space-y-2">
-                  <Label htmlFor="subject">Subject</Label>
+                  <Label htmlFor="name">Your name</Label>
                   <Input 
-                    id="subject" 
-                    placeholder="What's this about?"
+                    id="name" 
+                    placeholder="Jane Maker" 
                     required 
-                    maxLength={200}
+                    maxLength={100}
                   />
                 </div>
-
                 <div className="space-y-2">
-                  <Label htmlFor="message">Message</Label>
-                  <Textarea 
-                    id="message"
-                    placeholder="Tell us what's on your mind..."
-                    className="min-h-[180px]"
-                    required
-                    maxLength={2000}
+                  <Label htmlFor="email">Email address</Label>
+                  <Input 
+                    id="email" 
+                    type="email" 
+                    placeholder="jane@example.com" 
+                    required 
+                    maxLength={255}
                   />
                 </div>
-              </div>
+              </motion.div>
 
-              <Button 
-                type="submit" 
-                variant="gradient" 
-                size="lg" 
-                className="w-full mt-8"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  "Sending..."
-                ) : (
-                  <>
-                    Send Message
-                    <ArrowRight className="w-4 h-4" />
-                  </>
-                )}
-              </Button>
+              <motion.div variants={itemVariants} className="space-y-2 mb-5">
+                <Label htmlFor="subject">Subject</Label>
+                <Input 
+                  id="subject" 
+                  placeholder="What's this about?"
+                  required 
+                  maxLength={200}
+                />
+              </motion.div>
 
-              <p className="text-xs text-muted-foreground text-center mt-4">
-                We typically respond within 1-2 business days.
-              </p>
-            </form>
+              <motion.div variants={itemVariants} className="space-y-2 mb-5">
+                <Label htmlFor="message">Message</Label>
+                <Textarea 
+                  id="message"
+                  placeholder="Tell us what's on your mind..."
+                  className="min-h-[180px]"
+                  required
+                  maxLength={2000}
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <Button 
+                  type="submit" 
+                  variant="gradient" 
+                  size="lg" 
+                  className="w-full"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    "Sending..."
+                  ) : (
+                    <>
+                      Send Message
+                      <ArrowRight className="w-4 h-4" />
+                    </>
+                  )}
+                </Button>
+
+                <p className="text-xs text-muted-foreground text-center mt-4">
+                  We typically respond within 1-2 business days.
+                </p>
+              </motion.div>
+            </motion.form>
           </motion.div>
         </div>
       </section>

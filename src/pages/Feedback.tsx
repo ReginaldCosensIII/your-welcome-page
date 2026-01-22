@@ -29,6 +29,26 @@ const feedbackTypes = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] as const }
+  },
+};
+
 export default function Feedback() {
   const [selectedType, setSelectedType] = useState<string>("bug");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -147,107 +167,110 @@ export default function Feedback() {
             </div>
 
             {/* Form */}
-            <form 
+            <motion.form 
               onSubmit={handleSubmit}
               className="rounded-2xl border border-border bg-card p-8"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
             >
-              <div className="space-y-5">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Your name</Label>
-                    <Input 
-                      id="name" 
-                      placeholder="Jane Maker" 
-                      required 
-                      maxLength={100}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email address</Label>
-                    <Input 
-                      id="email" 
-                      type="email" 
-                      placeholder="jane@example.com" 
-                      required 
-                      maxLength={255}
-                    />
-                  </div>
-                </div>
-
+              <motion.div variants={itemVariants} className="grid sm:grid-cols-2 gap-4 mb-5">
                 <div className="space-y-2">
-                  <Label htmlFor="title">
-                    {selectedType === "bug" 
-                      ? "Brief description of the issue" 
-                      : selectedType === "feature"
-                      ? "Feature title"
-                      : "Subject"
-                    }
-                  </Label>
+                  <Label htmlFor="name">Your name</Label>
                   <Input 
-                    id="title" 
-                    placeholder={
-                      selectedType === "bug"
-                        ? "e.g., Pattern export fails on large designs"
-                        : selectedType === "feature"
-                        ? "e.g., Add color palette suggestions"
-                        : "e.g., My experience with the pattern editor"
-                    }
+                    id="name" 
+                    placeholder="Jane Maker" 
                     required 
-                    maxLength={200}
+                    maxLength={100}
                   />
                 </div>
-
                 <div className="space-y-2">
-                  <Label htmlFor="details">
-                    {selectedType === "bug"
-                      ? "Steps to reproduce & expected behavior"
-                      : "Details"
-                    }
-                  </Label>
-                  <Textarea 
-                    id="details"
-                    placeholder={
-                      selectedType === "bug"
-                        ? "1. What were you trying to do?\n2. What happened instead?\n3. What did you expect to happen?"
-                        : selectedType === "feature"
-                        ? "Describe the feature and how it would help your workflow..."
-                        : "Share your thoughts, suggestions, or experience..."
-                    }
-                    className="min-h-[180px]"
-                    required
-                    maxLength={2000}
+                  <Label htmlFor="email">Email address</Label>
+                  <Input 
+                    id="email" 
+                    type="email" 
+                    placeholder="jane@example.com" 
+                    required 
+                    maxLength={255}
                   />
                 </div>
+              </motion.div>
 
-                {selectedType === "bug" && (
-                  <div className="space-y-2">
-                    <Label htmlFor="browser">Browser & device (optional)</Label>
-                    <Input 
-                      id="browser" 
-                      placeholder="e.g., Chrome on MacBook Pro"
-                      maxLength={100}
-                    />
-                  </div>
-                )}
-              </div>
+              <motion.div variants={itemVariants} className="space-y-2 mb-5">
+                <Label htmlFor="title">
+                  {selectedType === "bug" 
+                    ? "Brief description of the issue" 
+                    : selectedType === "feature"
+                    ? "Feature title"
+                    : "Subject"
+                  }
+                </Label>
+                <Input 
+                  id="title" 
+                  placeholder={
+                    selectedType === "bug"
+                      ? "e.g., Pattern export fails on large designs"
+                      : selectedType === "feature"
+                      ? "e.g., Add color palette suggestions"
+                      : "e.g., My experience with the pattern editor"
+                  }
+                  required 
+                  maxLength={200}
+                />
+              </motion.div>
 
-              <Button 
-                type="submit" 
-                variant="gradient" 
-                size="lg" 
-                className="w-full mt-8"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  "Submitting..."
-                ) : (
-                  <>
-                    Submit Feedback
-                    <ArrowRight className="w-4 h-4" />
-                  </>
-                )}
-              </Button>
-            </form>
+              <motion.div variants={itemVariants} className="space-y-2 mb-5">
+                <Label htmlFor="details">
+                  {selectedType === "bug"
+                    ? "Steps to reproduce & expected behavior"
+                    : "Details"
+                  }
+                </Label>
+                <Textarea 
+                  id="details"
+                  placeholder={
+                    selectedType === "bug"
+                      ? "1. What were you trying to do?\n2. What happened instead?\n3. What did you expect to happen?"
+                      : selectedType === "feature"
+                      ? "Describe the feature and how it would help your workflow..."
+                      : "Share your thoughts, suggestions, or experience..."
+                  }
+                  className="min-h-[180px]"
+                  required
+                  maxLength={2000}
+                />
+              </motion.div>
+
+              {selectedType === "bug" && (
+                <motion.div variants={itemVariants} className="space-y-2 mb-5">
+                  <Label htmlFor="browser">Browser & device (optional)</Label>
+                  <Input 
+                    id="browser" 
+                    placeholder="e.g., Chrome on MacBook Pro"
+                    maxLength={100}
+                  />
+                </motion.div>
+              )}
+
+              <motion.div variants={itemVariants}>
+                <Button 
+                  type="submit" 
+                  variant="gradient" 
+                  size="lg" 
+                  className="w-full"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    "Submitting..."
+                  ) : (
+                    <>
+                      Submit Feedback
+                      <ArrowRight className="w-4 h-4" />
+                    </>
+                  )}
+                </Button>
+              </motion.div>
+            </motion.form>
           </motion.div>
         </div>
       </section>
