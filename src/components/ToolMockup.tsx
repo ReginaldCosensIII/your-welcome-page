@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import betaUIScreenshot from "@/assets/beta-ui-screenshot.png";
+import { MobileMockup } from "./MobileMockup";
 
 export function ToolMockup() {
   const ref = useRef(null);
@@ -29,13 +30,14 @@ export function ToolMockup() {
   const screenshotScale = useTransform(scrollYProgress, [0, 1], [1.02, 1]);
 
   return (
-<div className="mt-8 lg:mt-12 overflow-hidden">
-      <div className="max-w-4xl mx-auto">
-
-        {/* 3D Perspective Container */}
+    <div className="mt-8 lg:mt-12 overflow-hidden">
+      {/* Container for both mockups with relative positioning */}
+      <div className="max-w-5xl mx-auto relative">
+        
+        {/* Browser Mockup - Main element */}
         <div 
           ref={ref}
-          className="max-w-5xl mx-auto"
+          className="w-full lg:w-[85%]"
           style={{ perspective: "1500px" }}
         >
           <motion.div
@@ -100,6 +102,11 @@ export function ToolMockup() {
               </motion.div>
             </div>
           </motion.div>
+        </div>
+
+        {/* Mobile Mockup - Overlapping on bottom-right */}
+        <div className="absolute bottom-0 right-0 w-[30%] sm:w-[28%] md:w-[25%] lg:w-[22%] translate-y-[15%] translate-x-[5%] sm:translate-x-[8%] lg:translate-x-[12%]">
+          <MobileMockup />
         </div>
       </div>
     </div>
