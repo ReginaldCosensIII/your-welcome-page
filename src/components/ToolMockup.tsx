@@ -6,46 +6,39 @@ import { MobileMockup } from "./MobileMockup";
 export function ToolMockup() {
   const containerRef = useRef(null);
   
-  // Shared scroll progress for coordinated animations
-  // Extended range: browser animates first, then mobile continues after
+  // Extended scroll range - browser settles first, then mobile animates
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end center"]
+    offset: ["start end", "end start"]
   });
 
-  // Browser animation: completes in first 60% of scroll
-  const browserRotateX = useTransform(scrollYProgress, [0, 0.6], [45, 0]);
-  const browserRotateY = useTransform(scrollYProgress, [0, 0.6], [-20, 0]);
-  const browserRotateZ = useTransform(scrollYProgress, [0, 0.6], [5, 0]);
-  const browserScale = useTransform(scrollYProgress, [0, 0.6], [0.75, 1]);
-  const browserOpacity = useTransform(scrollYProgress, [0, 0.25], [0, 1]);
-  const browserY = useTransform(scrollYProgress, [0, 0.6], [60, 0]);
+  // Browser animation: completes in first 50% of scroll
+  const browserRotateX = useTransform(scrollYProgress, [0, 0.5], [45, 0]);
+  const browserRotateY = useTransform(scrollYProgress, [0, 0.5], [-20, 0]);
+  const browserRotateZ = useTransform(scrollYProgress, [0, 0.5], [5, 0]);
+  const browserScale = useTransform(scrollYProgress, [0, 0.5], [0.75, 1]);
+  const browserOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
+  const browserY = useTransform(scrollYProgress, [0, 0.5], [60, 0]);
   
   // Browser shadow
-  const shadowOpacity = useTransform(scrollYProgress, [0, 0.4], [0, 1]);
-  const shadowScale = useTransform(scrollYProgress, [0, 0.6], [0.85, 1]);
-  const shadowY = useTransform(scrollYProgress, [0, 0.6], [40, 0]);
+  const shadowOpacity = useTransform(scrollYProgress, [0, 0.35], [0, 1]);
+  const shadowScale = useTransform(scrollYProgress, [0, 0.5], [0.85, 1]);
+  const shadowY = useTransform(scrollYProgress, [0, 0.5], [40, 0]);
   
   // Browser inner parallax
-  const topBarY = useTransform(scrollYProgress, [0, 0.6], [-8, 0]);
-  const screenshotY = useTransform(scrollYProgress, [0, 0.6], [15, 0]);
-  const screenshotScale = useTransform(scrollYProgress, [0, 0.6], [1.02, 1]);
-  
-  // As mobile comes forward, browser slightly recedes (focus shift)
-  const browserRecede = useTransform(scrollYProgress, [0.7, 1], [1, 0.97]);
-  const browserDim = useTransform(scrollYProgress, [0.75, 1], [1, 0.85]);
+  const topBarY = useTransform(scrollYProgress, [0, 0.5], [-8, 0]);
+  const screenshotY = useTransform(scrollYProgress, [0, 0.5], [15, 0]);
+  const screenshotScale = useTransform(scrollYProgress, [0, 0.5], [1.02, 1]);
 
   return (
     <div 
       ref={containerRef}
-      className="mt-8 lg:mt-12 overflow-visible pb-16 lg:pb-24"
+      className="mt-8 lg:mt-12 overflow-visible pb-8 lg:pb-12"
     >
-      {/* Container for both mockups */}
-      <div className="max-w-5xl mx-auto relative">
-        
-        {/* Browser Mockup - Main element */}
+      {/* Centered Browser Mockup */}
+      <div className="max-w-5xl mx-auto">
         <div 
-          className="w-full lg:w-[85%]"
+          className="w-full mx-auto"
           style={{ perspective: "1500px" }}
         >
           <motion.div
@@ -53,14 +46,8 @@ export function ToolMockup() {
               rotateX: browserRotateX, 
               rotateY: browserRotateY, 
               rotateZ: browserRotateZ,
-              scale: useTransform(
-                [browserScale, browserRecede],
-                ([s, r]) => (s as number) * (r as number)
-              ),
-              opacity: useTransform(
-                [browserOpacity, browserDim],
-                ([o, d]) => (o as number) * (d as number)
-              ),
+              scale: browserScale,
+              opacity: browserOpacity,
               y: browserY,
               transformStyle: "preserve-3d" 
             }}
@@ -117,11 +104,11 @@ export function ToolMockup() {
             </div>
           </motion.div>
         </div>
+      </div>
 
-        {/* Mobile Mockup - Positioned to overlap bottom-right, animates after browser */}
-        <div className="absolute bottom-0 right-0 w-[28%] sm:w-[24%] md:w-[22%] lg:w-[20%] translate-y-[25%] translate-x-[2%] sm:translate-x-[5%]">
-          <MobileMockup scrollYProgress={scrollYProgress} />
-        </div>
+      {/* Mobile Mockup - Centered below browser, animates separately */}
+      <div className="max-w-xs sm:max-w-sm mx-auto mt-12 lg:mt-16">
+        <MobileMockup scrollYProgress={scrollYProgress} />
       </div>
     </div>
   );
