@@ -25,9 +25,13 @@ export function MobileMockup({ scrollYProgress }: MobileMockupProps) {
   const shadowY = useTransform(scrollYProgress, [0.5, 0.9], [10, 35]);
   const shadowScale = useTransform(scrollYProgress, [0.5, 0.9], [0.7, 0.85]);
 
+  // Create the filter transform outside of render
+  const shadowFilter = useTransform(shadowBlur, (blur) => `blur(${blur}px)`);
+  const ambientOpacity = useTransform(scrollYProgress, [0.55, 0.85], [0, 0.3]);
+
   return (
     <div 
-      className="relative z-20"
+      className="relative"
       style={{ perspective: "1200px" }}
     >
       <motion.div
@@ -35,15 +39,16 @@ export function MobileMockup({ scrollYProgress }: MobileMockupProps) {
           opacity,
           y,
           scale,
-          z: translateZ,
+          translateZ,
           transformStyle: "preserve-3d"
         }}
+        className="relative"
       >
         {/* Dynamic shadow - more dramatic depth effect */}
         <motion.div
           style={{ 
             opacity: shadowOpacity,
-            filter: useTransform(shadowBlur, (blur) => `blur(${blur}px)`),
+            filter: shadowFilter,
             y: shadowY,
             scale: shadowScale
           }}
@@ -53,7 +58,7 @@ export function MobileMockup({ scrollYProgress }: MobileMockupProps) {
         {/* Secondary ambient shadow for more depth */}
         <motion.div
           style={{ 
-            opacity: useTransform(scrollYProgress, [0.55, 0.9], [0, 0.3]),
+            opacity: ambientOpacity,
           }}
           className="absolute inset-0 -z-20 rounded-[2rem] sm:rounded-[2.5rem] bg-primary/20 blur-2xl transform translate-y-8 scale-110"
         />
