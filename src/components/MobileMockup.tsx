@@ -6,24 +6,24 @@ interface MobileMockupProps {
 }
 
 export function MobileMockup({ scrollYProgress }: MobileMockupProps) {
-  // Mobile animates AFTER browser settles (scroll 0.5 to 0.85)
-  // Creates a "scroll lock" effect where user scrolls but only mobile moves
+  // Phase 3 (0.5-0.9): Mobile animates in AFTER browser has settled
+  // This creates distinct scroll-locked phases
   
-  // Staggered depth: rises from below with forward depth shift - more pronounced
-  const translateZ = useTransform(scrollYProgress, [0.5, 0.85], [-40, 60]);
-  const scale = useTransform(scrollYProgress, [0.5, 0.85], [0.8, 1]);
+  // Staggered depth: rises from below with forward depth shift
+  const translateZ = useTransform(scrollYProgress, [0.5, 0.9], [-40, 60]);
+  const scale = useTransform(scrollYProgress, [0.5, 0.9], [0.8, 1]);
   
   // Fade in as focus shifts to mobile
   const opacity = useTransform(scrollYProgress, [0.45, 0.65], [0, 1]);
   
-  // Rise up from below - less distance since we're overlapping
-  const y = useTransform(scrollYProgress, [0.5, 0.85], [60, 0]);
+  // Rise up from below
+  const y = useTransform(scrollYProgress, [0.5, 0.9], [60, 0]);
   
-  // Dynamic shadow grows as mobile comes forward - more dramatic
-  const shadowOpacity = useTransform(scrollYProgress, [0.5, 0.85], [0, 0.6]);
-  const shadowBlur = useTransform(scrollYProgress, [0.5, 0.85], [20, 60]);
-  const shadowY = useTransform(scrollYProgress, [0.5, 0.85], [10, 35]);
-  const shadowScale = useTransform(scrollYProgress, [0.5, 0.85], [0.7, 0.85]);
+  // Dynamic shadow grows as mobile comes forward
+  const shadowOpacity = useTransform(scrollYProgress, [0.5, 0.9], [0, 0.6]);
+  const shadowBlur = useTransform(scrollYProgress, [0.5, 0.9], [20, 60]);
+  const shadowY = useTransform(scrollYProgress, [0.5, 0.9], [10, 35]);
+  const shadowScale = useTransform(scrollYProgress, [0.5, 0.9], [0.7, 0.85]);
 
   return (
     <div 
@@ -53,7 +53,7 @@ export function MobileMockup({ scrollYProgress }: MobileMockupProps) {
         {/* Secondary ambient shadow for more depth */}
         <motion.div
           style={{ 
-            opacity: useTransform(scrollYProgress, [0.55, 0.85], [0, 0.3]),
+            opacity: useTransform(scrollYProgress, [0.55, 0.9], [0, 0.3]),
           }}
           className="absolute inset-0 -z-20 rounded-[2rem] sm:rounded-[2.5rem] bg-primary/20 blur-2xl transform translate-y-8 scale-110"
         />
