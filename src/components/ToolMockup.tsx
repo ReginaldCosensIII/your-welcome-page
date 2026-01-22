@@ -10,7 +10,7 @@ export function ToolMockup() {
   // The sticky inner element stays in place while animations play
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end end"]
+    offset: ["start end", "end end"] // Start animation when section enters viewport
   });
 
   // Phase 1 (0-0.4): Browser animates in
@@ -39,11 +39,11 @@ export function ToolMockup() {
   return (
     <div 
       ref={containerRef}
-      className="relative"
-      style={{ height: "250vh" }} // Extra height for scroll-locked animation
+      className="relative mt-12 lg:mt-16"
+      style={{ height: "200vh" }} // Scroll-locked animation container
     >
       {/* Sticky container - stays in view while scrolling drives animations */}
-      <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden py-8 lg:py-12">
+      <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden pt-16 pb-8 lg:pt-20 lg:pb-12">
         {/* Centered Browser Mockup */}
         <div className="max-w-5xl mx-auto w-full px-4">
           <div 
