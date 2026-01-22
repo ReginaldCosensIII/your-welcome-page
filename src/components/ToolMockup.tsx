@@ -39,7 +39,7 @@ export function ToolMockup() {
   return (
     <div 
       ref={containerRef}
-      className="relative mt-8 lg:mt-10 h-[150vh] sm:h-[175vh] lg:h-[200vh]" // Responsive scroll-locked container
+      className="relative mt-8 lg:mt-10 h-[120vh] sm:h-[160vh] lg:h-[200vh]" // Responsive scroll-locked container
     >
       {/* Sticky container - stays in view while scrolling drives animations */}
       <div className="sticky top-0 h-screen flex flex-col items-center justify-start overflow-hidden pt-6 pb-8 lg:pt-8 lg:pb-12">
