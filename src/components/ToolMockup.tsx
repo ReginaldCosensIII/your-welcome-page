@@ -39,11 +39,11 @@ export function ToolMockup() {
   return (
     <div 
       ref={containerRef}
-      className="relative mt-12 lg:mt-16"
+      className="relative mt-8 lg:mt-10"
       style={{ height: "200vh" }} // Scroll-locked animation container
     >
       {/* Sticky container - stays in view while scrolling drives animations */}
-      <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden pt-16 pb-8 lg:pt-20 lg:pb-12">
+      <div className="sticky top-0 h-screen flex flex-col items-center justify-start overflow-hidden pt-6 pb-8 lg:pt-8 lg:pb-12">
         {/* Centered Browser Mockup */}
         <div className="max-w-5xl mx-auto w-full px-4">
           <div 
@@ -116,7 +116,7 @@ export function ToolMockup() {
         </div>
 
         {/* Mobile Mockup - Overlapping bottom of browser, smaller and with depth */}
-        <div className="max-w-[180px] sm:max-w-[220px] mx-auto -mt-24 sm:-mt-32 lg:-mt-40 relative z-30">
+        <div className="w-[180px] sm:w-[220px] mx-auto -mt-24 sm:-mt-32 lg:-mt-40 relative z-30">
           <MobileMockup scrollYProgress={scrollYProgress} />
         </div>
       </div>
