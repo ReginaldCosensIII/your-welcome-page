@@ -16,6 +16,26 @@ const betaPerks = [
   "Free during the beta period",
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] as const }
+  },
+};
+
 export default function BetaSignup() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -128,113 +148,116 @@ export default function BetaSignup() {
                     </p>
                   </div>
                 ) : (
-                  <form 
+                  <motion.form 
                     onSubmit={handleSubmit}
                     className="rounded-2xl border border-border bg-card p-8 lg:p-12"
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="visible"
                   >
-                    <h2 className="font-display text-xl font-semibold text-foreground mb-6">
+                    <motion.h2 variants={itemVariants} className="font-display text-xl font-semibold text-foreground mb-6">
                       Sign up for beta access
-                    </h2>
+                    </motion.h2>
 
-                    <div className="space-y-5">
-                      <div className="grid sm:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="firstName">First name</Label>
-                          <Input 
-                            id="firstName" 
-                            placeholder="Jane" 
-                            required 
-                            maxLength={50}
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="lastName">Last name</Label>
-                          <Input 
-                            id="lastName" 
-                            placeholder="Maker" 
-                            required 
-                            maxLength={50}
-                          />
-                        </div>
-                      </div>
-
+                    <motion.div variants={itemVariants} className="grid sm:grid-cols-2 gap-4 mb-5">
                       <div className="space-y-2">
-                        <Label htmlFor="email">Email address</Label>
+                        <Label htmlFor="firstName">First name</Label>
                         <Input 
-                          id="email" 
-                          type="email" 
-                          placeholder="jane@example.com" 
+                          id="firstName" 
+                          placeholder="Jane" 
                           required 
-                          maxLength={255}
-                        />
-                        <p className="text-xs text-muted-foreground">
-                          We'll send your beta access details here.
-                        </p>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="craft">Primary craft</Label>
-                        <select 
-                          id="craft"
-                          className="flex h-10 w-full rounded-lg border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                          required
-                        >
-                          <option value="">Select your craft</option>
-                          <option value="crochet">Crochet</option>
-                          <option value="knitting">Knitting</option>
-                          <option value="both">Both crochet and knitting</option>
-                          <option value="other">Other fiber arts</option>
-                        </select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="experience">Experience level</Label>
-                        <select 
-                          id="experience"
-                          className="flex h-10 w-full rounded-lg border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                          required
-                        >
-                          <option value="">Select your level</option>
-                          <option value="beginner">Beginner (0-2 years)</option>
-                          <option value="intermediate">Intermediate (2-5 years)</option>
-                          <option value="advanced">Advanced (5+ years)</option>
-                          <option value="professional">Professional / Designer</option>
-                        </select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="interest">What interests you most about BlanketSmith? (optional)</Label>
-                        <Textarea 
-                          id="interest"
-                          placeholder="Tell us what you're hoping to create or any features you're excited about..."
-                          className="min-h-[100px] resize-none"
-                          maxLength={500}
+                          maxLength={50}
                         />
                       </div>
-                    </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="lastName">Last name</Label>
+                        <Input 
+                          id="lastName" 
+                          placeholder="Maker" 
+                          required 
+                          maxLength={50}
+                        />
+                      </div>
+                    </motion.div>
 
-                    <Button 
-                      type="submit" 
-                      variant="gradient" 
-                      size="lg" 
-                      className="w-full mt-8"
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? (
-                        "Signing up..."
-                      ) : (
-                        <>
-                          Join the Beta
-                          <ArrowRight className="w-4 h-4" />
-                        </>
-                      )}
-                    </Button>
+                    <motion.div variants={itemVariants} className="space-y-2 mb-5">
+                      <Label htmlFor="email">Email address</Label>
+                      <Input 
+                        id="email" 
+                        type="email" 
+                        placeholder="jane@example.com" 
+                        required 
+                        maxLength={255}
+                      />
+                      <p className="text-xs text-muted-foreground">
+                        We'll send your beta access details here.
+                      </p>
+                    </motion.div>
 
-                    <p className="text-xs text-muted-foreground text-center mt-4">
-                      By signing up, you agree to receive product updates and beta 
-                      communications from BlanketSmith.
-                    </p>
-                  </form>
+                    <motion.div variants={itemVariants} className="space-y-2 mb-5">
+                      <Label htmlFor="craft">Primary craft</Label>
+                      <select 
+                        id="craft"
+                        className="flex h-10 w-full rounded-lg border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                        required
+                      >
+                        <option value="">Select your craft</option>
+                        <option value="crochet">Crochet</option>
+                        <option value="knitting">Knitting</option>
+                        <option value="both">Both crochet and knitting</option>
+                        <option value="other">Other fiber arts</option>
+                      </select>
+                    </motion.div>
+
+                    <motion.div variants={itemVariants} className="space-y-2 mb-5">
+                      <Label htmlFor="experience">Experience level</Label>
+                      <select 
+                        id="experience"
+                        className="flex h-10 w-full rounded-lg border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                        required
+                      >
+                        <option value="">Select your level</option>
+                        <option value="beginner">Beginner (0-2 years)</option>
+                        <option value="intermediate">Intermediate (2-5 years)</option>
+                        <option value="advanced">Advanced (5+ years)</option>
+                        <option value="professional">Professional / Designer</option>
+                      </select>
+                    </motion.div>
+
+                    <motion.div variants={itemVariants} className="space-y-2 mb-5">
+                      <Label htmlFor="interest">What interests you most about BlanketSmith? (optional)</Label>
+                      <Textarea 
+                        id="interest"
+                        placeholder="Tell us what you're hoping to create or any features you're excited about..."
+                        className="min-h-[100px] resize-none"
+                        maxLength={500}
+                      />
+                    </motion.div>
+
+                    <motion.div variants={itemVariants}>
+                      <Button 
+                        type="submit" 
+                        variant="gradient" 
+                        size="lg" 
+                        className="w-full"
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? (
+                          "Signing up..."
+                        ) : (
+                          <>
+                            Join the Beta
+                            <ArrowRight className="w-4 h-4" />
+                          </>
+                        )}
+                      </Button>
+
+                      <p className="text-xs text-muted-foreground text-center mt-4">
+                        By signing up, you agree to receive product updates and beta 
+                        communications from BlanketSmith.
+                      </p>
+                    </motion.div>
+                  </motion.form>
                 )}
               </div>
             </div>

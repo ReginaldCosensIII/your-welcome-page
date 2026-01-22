@@ -29,6 +29,26 @@ const partnerTypes = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] as const }
+  },
+};
+
 export default function Partnerships() {
   const [selectedType, setSelectedType] = useState<string>("creator");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -149,111 +169,114 @@ export default function Partnerships() {
             </div>
 
             {/* Form */}
-            <form 
+            <motion.form 
               onSubmit={handleSubmit}
               className="rounded-2xl border border-border bg-card p-8"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
             >
-              <div className="space-y-5">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Your name</Label>
-                    <Input 
-                      id="name" 
-                      placeholder="Jane Maker" 
-                      required 
-                      maxLength={100}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email address</Label>
-                    <Input 
-                      id="email" 
-                      type="email" 
-                      placeholder="jane@example.com" 
-                      required 
-                      maxLength={255}
-                    />
-                  </div>
-                </div>
-
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="company">Company / Brand name</Label>
-                    <Input 
-                      id="company" 
-                      placeholder="Your brand or channel name"
-                      required 
-                      maxLength={100}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="website">Website / Social link</Label>
-                    <Input 
-                      id="website" 
-                      type="url" 
-                      placeholder="https://..."
-                      maxLength={500}
-                    />
-                  </div>
-                </div>
-
+              <motion.div variants={itemVariants} className="grid sm:grid-cols-2 gap-4 mb-5">
                 <div className="space-y-2">
-                  <Label htmlFor="audience">
-                    {selectedType === "creator" 
-                      ? "Tell us about your audience" 
+                  <Label htmlFor="name">Your name</Label>
+                  <Input 
+                    id="name" 
+                    placeholder="Jane Maker" 
+                    required 
+                    maxLength={100}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email address</Label>
+                  <Input 
+                    id="email" 
+                    type="email" 
+                    placeholder="jane@example.com" 
+                    required 
+                    maxLength={255}
+                  />
+                </div>
+              </motion.div>
+
+              <motion.div variants={itemVariants} className="grid sm:grid-cols-2 gap-4 mb-5">
+                <div className="space-y-2">
+                  <Label htmlFor="company">Company / Brand name</Label>
+                  <Input 
+                    id="company" 
+                    placeholder="Your brand or channel name"
+                    required 
+                    maxLength={100}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="website">Website / Social link</Label>
+                  <Input 
+                    id="website" 
+                    type="url" 
+                    placeholder="https://..."
+                    maxLength={500}
+                  />
+                </div>
+              </motion.div>
+
+              <motion.div variants={itemVariants} className="space-y-2 mb-5">
+                <Label htmlFor="audience">
+                  {selectedType === "creator" 
+                    ? "Tell us about your audience" 
+                    : selectedType === "designer"
+                    ? "Tell us about your design work"
+                    : "Tell us about your business"
+                  }
+                </Label>
+                <Textarea 
+                  id="audience"
+                  placeholder={
+                    selectedType === "creator"
+                      ? "Describe your platform, audience size, and content focus..."
                       : selectedType === "designer"
-                      ? "Tell us about your design work"
-                      : "Tell us about your business"
-                    }
-                  </Label>
-                  <Textarea 
-                    id="audience"
-                    placeholder={
-                      selectedType === "creator"
-                        ? "Describe your platform, audience size, and content focus..."
-                        : selectedType === "designer"
-                        ? "Share your design style, published patterns, and where you sell..."
-                        : "Tell us about your business, products, and customer base..."
-                    }
-                    className="min-h-[120px]"
-                    required
-                    maxLength={1000}
-                  />
-                </div>
+                      ? "Share your design style, published patterns, and where you sell..."
+                      : "Tell us about your business, products, and customer base..."
+                  }
+                  className="min-h-[120px]"
+                  required
+                  maxLength={1000}
+                />
+              </motion.div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="proposal">Partnership ideas</Label>
-                  <Textarea 
-                    id="proposal"
-                    placeholder="What kind of collaboration are you envisioning? How can we work together to serve the maker community?"
-                    className="min-h-[150px]"
-                    required
-                    maxLength={2000}
-                  />
-                </div>
-              </div>
+              <motion.div variants={itemVariants} className="space-y-2 mb-5">
+                <Label htmlFor="proposal">Partnership ideas</Label>
+                <Textarea 
+                  id="proposal"
+                  placeholder="What kind of collaboration are you envisioning? How can we work together to serve the maker community?"
+                  className="min-h-[150px]"
+                  required
+                  maxLength={2000}
+                />
+              </motion.div>
 
-              <Button 
-                type="submit" 
-                variant="gradient" 
-                size="lg" 
-                className="w-full mt-8"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  "Submitting..."
-                ) : (
-                  <>
-                    Submit Partnership Inquiry
-                    <ArrowRight className="w-4 h-4" />
-                  </>
-                )}
-              </Button>
+              <motion.div variants={itemVariants}>
+                <Button 
+                  type="submit" 
+                  variant="gradient" 
+                  size="lg" 
+                  className="w-full"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    "Submitting..."
+                  ) : (
+                    <>
+                      Submit Partnership Inquiry
+                      <ArrowRight className="w-4 h-4" />
+                    </>
+                  )}
+                </Button>
 
-              <p className="text-xs text-muted-foreground text-center mt-4">
-                We typically respond to partnership inquiries within 3-5 business days.
-              </p>
-            </form>
+                <p className="text-xs text-muted-foreground text-center mt-4">
+                  We typically respond to partnership inquiries within 3-5 business days.
+                </p>
+              </motion.div>
+            </motion.form>
           </motion.div>
         </div>
       </section>
