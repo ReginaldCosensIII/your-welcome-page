@@ -9,20 +9,21 @@ export function MobileMockup({ scrollYProgress }: MobileMockupProps) {
   // Mobile animates AFTER browser settles (scroll 0.5 to 0.85)
   // Creates a "scroll lock" effect where user scrolls but only mobile moves
   
-  // Staggered depth: rises from below with forward depth shift
-  const translateZ = useTransform(scrollYProgress, [0.5, 0.85], [-60, 30]);
-  const scale = useTransform(scrollYProgress, [0.5, 0.85], [0.85, 1]);
+  // Staggered depth: rises from below with forward depth shift - more pronounced
+  const translateZ = useTransform(scrollYProgress, [0.5, 0.85], [-40, 60]);
+  const scale = useTransform(scrollYProgress, [0.5, 0.85], [0.8, 1]);
   
   // Fade in as focus shifts to mobile
   const opacity = useTransform(scrollYProgress, [0.45, 0.65], [0, 1]);
   
-  // Rise up from below
-  const y = useTransform(scrollYProgress, [0.5, 0.85], [80, 0]);
+  // Rise up from below - less distance since we're overlapping
+  const y = useTransform(scrollYProgress, [0.5, 0.85], [60, 0]);
   
-  // Dynamic shadow grows as mobile comes forward
-  const shadowOpacity = useTransform(scrollYProgress, [0.55, 0.85], [0, 1]);
-  const shadowBlur = useTransform(scrollYProgress, [0.55, 0.85], [15, 40]);
-  const shadowY = useTransform(scrollYProgress, [0.55, 0.85], [8, 24]);
+  // Dynamic shadow grows as mobile comes forward - more dramatic
+  const shadowOpacity = useTransform(scrollYProgress, [0.5, 0.85], [0, 0.6]);
+  const shadowBlur = useTransform(scrollYProgress, [0.5, 0.85], [20, 60]);
+  const shadowY = useTransform(scrollYProgress, [0.5, 0.85], [10, 35]);
+  const shadowScale = useTransform(scrollYProgress, [0.5, 0.85], [0.7, 0.85]);
 
   return (
     <div 
@@ -38,20 +39,29 @@ export function MobileMockup({ scrollYProgress }: MobileMockupProps) {
           transformStyle: "preserve-3d"
         }}
       >
-        {/* Dynamic shadow */}
+        {/* Dynamic shadow - more dramatic depth effect */}
         <motion.div
           style={{ 
             opacity: shadowOpacity,
             filter: useTransform(shadowBlur, (blur) => `blur(${blur}px)`),
-            y: shadowY
+            y: shadowY,
+            scale: shadowScale
           }}
-          className="absolute inset-0 -z-10 rounded-[2.5rem] sm:rounded-[3rem] bg-foreground/25 transform scale-90"
+          className="absolute inset-0 -z-10 rounded-[2rem] sm:rounded-[2.5rem] bg-foreground/40"
         />
         
-        {/* Phone Frame */}
-        <div className="rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3rem] overflow-hidden border-[5px] sm:border-[6px] md:border-[8px] border-foreground/90 bg-foreground/90 relative shadow-[0_35px_70px_-15px_rgba(0,0,0,0.35),0_20px_40px_-20px_rgba(0,0,0,0.3)]">
-          {/* Phone Notch/Dynamic Island */}
-          <div className="absolute top-2 sm:top-2.5 md:top-3 left-1/2 -translate-x-1/2 w-16 sm:w-20 md:w-24 h-2 sm:h-2.5 md:h-3 bg-foreground/90 rounded-full z-20" />
+        {/* Secondary ambient shadow for more depth */}
+        <motion.div
+          style={{ 
+            opacity: useTransform(scrollYProgress, [0.55, 0.85], [0, 0.3]),
+          }}
+          className="absolute inset-0 -z-20 rounded-[2rem] sm:rounded-[2.5rem] bg-primary/20 blur-2xl transform translate-y-8 scale-110"
+        />
+        
+        {/* Phone Frame - smaller border for compact size */}
+        <div className="rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden border-[4px] sm:border-[5px] border-foreground/90 bg-foreground/90 relative shadow-[0_25px_50px_-12px_rgba(0,0,0,0.4),0_12px_24px_-8px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.1)]">
+          {/* Phone Notch/Dynamic Island - scaled down */}
+          <div className="absolute top-1.5 sm:top-2 left-1/2 -translate-x-1/2 w-12 sm:w-16 h-1.5 sm:h-2 bg-foreground/90 rounded-full z-20" />
           
           {/* Screen Content - Branded Placeholder */}
           <div className="bg-background relative overflow-hidden">
@@ -72,27 +82,27 @@ export function MobileMockup({ scrollYProgress }: MobileMockupProps) {
                 }}
               />
               
-              {/* Centered Content */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center p-6 sm:p-8">
+              {/* Centered Content - compact sizing */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center p-4 sm:p-5">
                 {/* Icon Container */}
-                <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-2xl gradient-bg flex items-center justify-center mb-4 sm:mb-6 shadow-lg">
-                  <Smartphone className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white" strokeWidth={1.5} />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl gradient-bg flex items-center justify-center mb-2 sm:mb-3 shadow-lg">
+                  <Smartphone className="w-5 h-5 sm:w-6 sm:h-6 text-white" strokeWidth={1.5} />
                 </div>
                 
                 {/* Title */}
-                <h3 className="text-base sm:text-lg md:text-xl font-display font-bold text-foreground mb-2 text-center">
+                <h3 className="text-sm sm:text-base font-display font-bold text-foreground mb-1 text-center">
                   Mobile App
                 </h3>
                 
                 {/* Subtitle */}
-                <p className="text-xs sm:text-sm text-muted-foreground text-center max-w-[140px] sm:max-w-[160px] mb-4 sm:mb-6">
+                <p className="text-[10px] sm:text-xs text-muted-foreground text-center max-w-[120px] mb-2 sm:mb-3">
                   Create patterns anywhere, anytime
                 </p>
                 
                 {/* Coming Soon Badge */}
-                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-brand-midblue/10 border border-brand-purple/30">
-                  <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-brand-midblue" />
-                  <span className="text-[10px] sm:text-xs font-medium text-brand-midblue">Coming Soon</span>
+                <div className="inline-flex items-center gap-1 px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-full bg-brand-midblue/10 border border-brand-purple/30">
+                  <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-brand-midblue" />
+                  <span className="text-[8px] sm:text-[10px] font-medium text-brand-midblue">Coming Soon</span>
                 </div>
               </div>
               
@@ -105,8 +115,8 @@ export function MobileMockup({ scrollYProgress }: MobileMockupProps) {
           </div>
         </div>
         
-        {/* Phone Bottom Bar Indicator */}
-        <div className="absolute bottom-2 sm:bottom-2.5 md:bottom-3 left-1/2 -translate-x-1/2 w-16 sm:w-20 md:w-24 h-1 sm:h-1 bg-background/60 rounded-full" />
+        {/* Phone Bottom Bar Indicator - scaled down */}
+        <div className="absolute bottom-1.5 sm:bottom-2 left-1/2 -translate-x-1/2 w-10 sm:w-14 h-0.5 sm:h-1 bg-background/60 rounded-full" />
       </motion.div>
     </div>
   );

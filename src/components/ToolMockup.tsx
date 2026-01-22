@@ -106,8 +106,8 @@ export function ToolMockup() {
         </div>
       </div>
 
-      {/* Mobile Mockup - Centered below browser, animates separately */}
-      <div className="max-w-xs sm:max-w-sm mx-auto mt-12 lg:mt-16">
+      {/* Mobile Mockup - Overlapping bottom of browser, smaller and with depth */}
+      <div className="max-w-[180px] sm:max-w-[220px] mx-auto -mt-24 sm:-mt-32 lg:-mt-40 relative z-30">
         <MobileMockup scrollYProgress={scrollYProgress} />
       </div>
     </div>
