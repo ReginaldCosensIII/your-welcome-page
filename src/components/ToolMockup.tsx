@@ -1,12 +1,10 @@
 import { useRef } from "react";
-import { motion, useMotionValue, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import betaUIScreenshot from "@/assets/beta-ui-screenshot.png";
 import { MobileMockup } from "./MobileMockup";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 export function ToolMockup() {
   const containerRef = useRef(null);
-  const isMobile = useIsMobile();
   
   // Scroll through this tall container drives the animations
   // The sticky inner element stays in place while animations play
@@ -15,41 +13,36 @@ export function ToolMockup() {
     offset: ["start end", "end end"] // Start animation when section enters viewport
   });
 
-  // On mobile we render a non-scroll-locked layout (auto height) to avoid large
-  // reserved whitespace before the next section.
-  const mobileStaticProgress = useMotionValue(1);
-  const effectiveProgress = isMobile ? mobileStaticProgress : scrollYProgress;
-
   // Phase 1 (0-0.4): Browser animates in
   // Phase 2 (0.4-0.5): Hold - browser settled
   // Phase 3 (0.5-0.9): Mobile animates in
   // Phase 4 (0.9-1): Hold - both settled, then scroll continues
 
   // Browser animation: completes in first 40% of scroll
-  const browserRotateX = useTransform(effectiveProgress, [0, 0.4], [45, 0]);
-  const browserRotateY = useTransform(effectiveProgress, [0, 0.4], [-20, 0]);
-  const browserRotateZ = useTransform(effectiveProgress, [0, 0.4], [5, 0]);
-  const browserScale = useTransform(effectiveProgress, [0, 0.4], [0.75, 1]);
-  const browserOpacity = useTransform(effectiveProgress, [0, 0.15], [0, 1]);
-  const browserY = useTransform(effectiveProgress, [0, 0.4], [60, 0]);
+  const browserRotateX = useTransform(scrollYProgress, [0, 0.4], [45, 0]);
+  const browserRotateY = useTransform(scrollYProgress, [0, 0.4], [-20, 0]);
+  const browserRotateZ = useTransform(scrollYProgress, [0, 0.4], [5, 0]);
+  const browserScale = useTransform(scrollYProgress, [0, 0.4], [0.75, 1]);
+  const browserOpacity = useTransform(scrollYProgress, [0, 0.15], [0, 1]);
+  const browserY = useTransform(scrollYProgress, [0, 0.4], [60, 0]);
   
   // Browser shadow
-  const shadowOpacity = useTransform(effectiveProgress, [0, 0.3], [0, 1]);
-  const shadowScale = useTransform(effectiveProgress, [0, 0.4], [0.85, 1]);
-  const shadowY = useTransform(effectiveProgress, [0, 0.4], [40, 0]);
+  const shadowOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
+  const shadowScale = useTransform(scrollYProgress, [0, 0.4], [0.85, 1]);
+  const shadowY = useTransform(scrollYProgress, [0, 0.4], [40, 0]);
   
   // Browser inner parallax
-  const topBarY = useTransform(effectiveProgress, [0, 0.4], [-8, 0]);
-  const screenshotY = useTransform(effectiveProgress, [0, 0.4], [15, 0]);
-  const screenshotScale = useTransform(effectiveProgress, [0, 0.4], [1.02, 1]);
+  const topBarY = useTransform(scrollYProgress, [0, 0.4], [-8, 0]);
+  const screenshotY = useTransform(scrollYProgress, [0, 0.4], [15, 0]);
+  const screenshotScale = useTransform(scrollYProgress, [0, 0.4], [1.02, 1]);
 
   return (
     <div 
       ref={containerRef}
-      className="relative mt-8 lg:mt-10 h-auto md:h-[160vh] lg:h-[200vh]" // Mobile: auto height; md+: scroll-locked container
+      className="relative mt-8 lg:mt-10 h-[75vh] sm:h-[120vh] md:h-[160vh] lg:h-[200vh]"
     >
       {/* Sticky container - stays in view while scrolling drives animations */}
-      <div className="relative flex flex-col items-center justify-start overflow-hidden pt-6 pb-2 md:sticky md:top-0 md:h-screen md:pb-6 lg:pt-8 lg:pb-12">
+      <div className="sticky top-0 h-screen flex flex-col items-center justify-start overflow-hidden pt-6 pb-6 lg:pt-8 lg:pb-12">
         {/* Centered Browser Mockup */}
         <div className="max-w-5xl mx-auto w-full px-4">
           <div 
@@ -123,7 +116,7 @@ export function ToolMockup() {
 
         {/* Mobile Mockup - Overlapping bottom of browser, smaller and with depth */}
         <div className="w-[180px] sm:w-[220px] mx-auto -mt-24 sm:-mt-32 lg:-mt-40 relative z-30">
-          <MobileMockup scrollYProgress={effectiveProgress} />
+          <MobileMockup scrollYProgress={scrollYProgress} />
         </div>
       </div>
     </div>
