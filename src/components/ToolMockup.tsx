@@ -23,12 +23,11 @@ export function ToolMockup() {
   const browserRotateY = useTransform(scrollYProgress, [0, 0.4], [-20, 0]);
   const browserRotateZ = useTransform(scrollYProgress, [0, 0.4], [5, 0]);
   const browserScale = useTransform(scrollYProgress, [0, 0.4], [0.75, 1]);
-  // Also add a short exit at the very end so the next section never gets covered.
-  const browserOpacity = useTransform(scrollYProgress, [0, 0.15, 0.9, 1], [0, 1, 1, 0]);
-  const browserY = useTransform(scrollYProgress, [0, 0.4, 0.9, 1], [60, 0, 0, -90]);
+  const browserOpacity = useTransform(scrollYProgress, [0, 0.15], [0, 1]);
+  const browserY = useTransform(scrollYProgress, [0, 0.4], [60, 0]);
   
   // Browser shadow
-  const shadowOpacity = useTransform(scrollYProgress, [0, 0.3, 0.9, 1], [0, 1, 1, 0]);
+  const shadowOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
   const shadowScale = useTransform(scrollYProgress, [0, 0.4], [0.85, 1]);
   const shadowY = useTransform(scrollYProgress, [0, 0.4], [40, 0]);
   
@@ -40,7 +39,7 @@ export function ToolMockup() {
   return (
     <div 
       ref={containerRef}
-      className="relative mt-8 lg:mt-10 h-[75vh] sm:h-[120vh] md:h-[160vh] lg:h-[220vh]"
+      className="relative mt-8 lg:mt-10 overflow-visible min-h-[75vh] sm:min-h-[120vh] md:min-h-[160vh] lg:min-h-[220vh] pb-24 sm:pb-32 lg:pb-40"
     >
       {/* Sticky container - stays in view while scrolling drives animations */}
       <div className="sticky top-0 h-screen flex flex-col items-center justify-start overflow-visible pt-6 pb-6 lg:pt-8 lg:pb-12">
@@ -115,8 +114,13 @@ export function ToolMockup() {
           </div>
         </div>
 
-        {/* Mobile Mockup - Overlapping bottom of browser, smaller and with depth */}
-        <div className="w-[180px] sm:w-[220px] mx-auto -mt-24 sm:-mt-32 lg:-mt-40 relative z-10">
+        {/*
+          Mobile Mockup
+          IMPORTANT: Use translate (visual overlap) instead of negative margins (layout overlap).
+          This keeps the phone fully contained within this section and preserves consistent spacing
+          before the next section across all breakpoints.
+        */}
+        <div className="w-[180px] sm:w-[220px] mx-auto mt-6 sm:mt-8 lg:mt-10 relative z-10 -translate-y-24 sm:-translate-y-32 lg:-translate-y-40">
           <MobileMockup scrollYProgress={scrollYProgress} />
         </div>
       </div>
