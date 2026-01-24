@@ -23,11 +23,12 @@ export function ToolMockup() {
   const browserRotateY = useTransform(scrollYProgress, [0, 0.4], [-20, 0]);
   const browserRotateZ = useTransform(scrollYProgress, [0, 0.4], [5, 0]);
   const browserScale = useTransform(scrollYProgress, [0, 0.4], [0.75, 1]);
-  const browserOpacity = useTransform(scrollYProgress, [0, 0.15], [0, 1]);
-  const browserY = useTransform(scrollYProgress, [0, 0.4], [60, 0]);
+  // Also add a short exit at the very end so the next section never gets covered.
+  const browserOpacity = useTransform(scrollYProgress, [0, 0.15, 0.9, 1], [0, 1, 1, 0]);
+  const browserY = useTransform(scrollYProgress, [0, 0.4, 0.9, 1], [60, 0, 0, -90]);
   
   // Browser shadow
-  const shadowOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
+  const shadowOpacity = useTransform(scrollYProgress, [0, 0.3, 0.9, 1], [0, 1, 1, 0]);
   const shadowScale = useTransform(scrollYProgress, [0, 0.4], [0.85, 1]);
   const shadowY = useTransform(scrollYProgress, [0, 0.4], [40, 0]);
   
@@ -115,7 +116,7 @@ export function ToolMockup() {
         </div>
 
         {/* Mobile Mockup - Overlapping bottom of browser, smaller and with depth */}
-        <div className="w-[180px] sm:w-[220px] mx-auto -mt-24 sm:-mt-32 lg:-mt-40 relative z-30 lg:pb-40">
+        <div className="w-[180px] sm:w-[220px] mx-auto -mt-24 sm:-mt-32 lg:-mt-40 relative z-10">
           <MobileMockup scrollYProgress={scrollYProgress} />
         </div>
       </div>

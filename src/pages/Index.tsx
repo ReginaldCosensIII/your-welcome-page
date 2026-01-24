@@ -182,7 +182,7 @@ export default function Index() {
       </section>
 
       {/* What is BlanketSmith? Section */}
-      <section className="py-20 lg:pt-28 lg:pb-40 bg-secondary/30">
+      <section className="relative z-0 py-20 lg:py-28 bg-secondary/30 lg:isolate">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-6">
@@ -207,7 +207,7 @@ export default function Index() {
       </section>
 
       {/* Feature Highlights */}
-      <section className="py-20 lg:py-28">
+      <section className="relative z-10 bg-background py-20 lg:py-28 lg:z-20 lg:isolate">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">
