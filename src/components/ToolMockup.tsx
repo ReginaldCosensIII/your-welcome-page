@@ -42,78 +42,80 @@ export function ToolMockup() {
       className="relative mt-8 lg:mt-10 h-[75vh] sm:h-[120vh] md:h-[160vh] lg:h-[200vh]"
     >
       {/* Sticky container - stays in view while scrolling drives animations */}
-      <div className="sticky top-0 h-screen flex items-center justify-center py-4 lg:py-6">
-        {/* Browser Mockup Container */}
-        <div 
-          className="w-full max-w-5xl mx-auto px-4"
-          style={{ perspective: "1500px" }}
-        >
-          <motion.div
-            style={{ 
-              rotateX: browserRotateX, 
-              rotateY: browserRotateY, 
-              rotateZ: browserRotateZ,
-              scale: browserScale,
-              opacity: browserOpacity,
-              y: browserY,
-              transformStyle: "preserve-3d" 
-            }}
+      <div className="sticky top-0 h-screen flex flex-col items-center justify-start overflow-hidden pt-6 pb-6 lg:pt-8 lg:pb-12">
+        {/* Centered Browser Mockup */}
+        <div className="max-w-5xl mx-auto w-full px-4">
+          <div 
+            className="w-full mx-auto"
+            style={{ perspective: "1500px" }}
           >
-            {/* Animated Shadow Layer */}
             <motion.div
-              style={{
-                opacity: shadowOpacity,
-                scale: shadowScale,
-                y: shadowY
+              style={{ 
+                rotateX: browserRotateX, 
+                rotateY: browserRotateY, 
+                rotateZ: browserRotateZ,
+                scale: browserScale,
+                opacity: browserOpacity,
+                y: browserY,
+                transformStyle: "preserve-3d" 
               }}
-              className="absolute inset-0 -z-10 rounded-xl bg-gradient-to-b from-primary/20 to-accent/10 blur-3xl transform translate-y-8 scale-95"
-            />
-            
-            {/* Browser Frame */}
-            <div className="rounded-xl overflow-hidden border border-border bg-card relative shadow-[0_50px_100px_-20px_rgba(0,0,0,0.25),0_30px_60px_-30px_rgba(0,0,0,0.3)]">
-              {/* Browser Top Bar */}
-              <motion.div 
-                style={{ y: topBarY }}
-                className="bg-secondary/80 border-b border-border px-1 py-0.5 sm:px-3 sm:py-2 md:px-4 md:py-3 flex items-center gap-0.5 sm:gap-2 md:gap-3 relative z-10"
-              >
-                {/* Traffic Lights - ultra compact on mobile */}
-                <div className="flex items-center gap-[2px] sm:gap-1.5 md:gap-2">
-                  <div className="w-1 h-1 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 rounded-full bg-red-400/80" />
-                  <div className="w-1 h-1 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 rounded-full bg-yellow-400/80" />
-                  <div className="w-1 h-1 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 rounded-full bg-green-400/80" />
-                </div>
-                
-                {/* URL Bar - smaller on mobile */}
-                <div className="flex-1 max-w-md mx-auto">
-                  <div className="bg-background/60 rounded px-1 py-[2px] sm:px-3 sm:py-1 md:px-4 md:py-1.5 text-[6px] sm:text-xs md:text-sm text-muted-foreground text-center border border-border/50">
-                    app.blanketsmith.com
+            >
+              {/* Animated Shadow Layer */}
+              <motion.div
+                style={{
+                  opacity: shadowOpacity,
+                  scale: shadowScale,
+                  y: shadowY
+                }}
+                className="absolute inset-0 -z-10 rounded-xl bg-gradient-to-b from-primary/20 to-accent/10 blur-3xl transform translate-y-8 scale-95"
+              />
+              
+              {/* Browser Frame */}
+              <div className="rounded-xl overflow-hidden border border-border bg-card relative shadow-[0_50px_100px_-20px_rgba(0,0,0,0.25),0_30px_60px_-30px_rgba(0,0,0,0.3)]">
+                {/* Browser Top Bar */}
+                <motion.div 
+                  style={{ y: topBarY }}
+                  className="bg-secondary/80 border-b border-border px-1 py-0.5 sm:px-3 sm:py-2 md:px-4 md:py-3 flex items-center gap-0.5 sm:gap-2 md:gap-3 relative z-10"
+                >
+                  {/* Traffic Lights - ultra compact on mobile */}
+                  <div className="flex items-center gap-[2px] sm:gap-1.5 md:gap-2">
+                    <div className="w-1 h-1 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 rounded-full bg-red-400/80" />
+                    <div className="w-1 h-1 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 rounded-full bg-yellow-400/80" />
+                    <div className="w-1 h-1 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 rounded-full bg-green-400/80" />
                   </div>
-                </div>
-                
-                {/* Spacer for symmetry */}
-                <div className="w-3 sm:w-10 md:w-14" />
-              </motion.div>
+                  
+                  {/* URL Bar - smaller on mobile */}
+                  <div className="flex-1 max-w-md mx-auto">
+                    <div className="bg-background/60 rounded px-1 py-[2px] sm:px-3 sm:py-1 md:px-4 md:py-1.5 text-[6px] sm:text-xs md:text-sm text-muted-foreground text-center border border-border/50">
+                      app.blanketsmith.com
+                    </div>
+                  </div>
+                  
+                  {/* Spacer for symmetry */}
+                  <div className="w-3 sm:w-10 md:w-14" />
+                </motion.div>
 
-              {/* Screenshot - constrained height to leave room for mobile mockup */}
-              <motion.div 
-                style={{ y: screenshotY, scale: screenshotScale }}
-                className="relative bg-background origin-top max-h-[35vh] sm:max-h-[40vh] lg:max-h-[45vh] overflow-hidden"
-              >
-                <img 
-                  src={betaUIScreenshot} 
-                  alt="BlanketSmith Pattern Tool Interface" 
-                  className="w-full h-auto block"
-                />
-                
-                {/* Subtle gradient overlay at bottom */}
-                <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-card/50 to-transparent pointer-events-none" />
-              </motion.div>
-            </div>
-          </motion.div>
+                {/* Screenshot */}
+                <motion.div 
+                  style={{ y: screenshotY, scale: screenshotScale }}
+                  className="relative bg-background origin-top"
+                >
+                  <img 
+                    src={betaUIScreenshot} 
+                    alt="BlanketSmith Pattern Tool Interface" 
+                    className="w-full h-auto block"
+                  />
+                  
+                  {/* Subtle gradient overlay at bottom */}
+                  <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-card/50 to-transparent pointer-events-none" />
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
         </div>
 
-        {/* Mobile Mockup - Fixed position at bottom of viewport, overlapping browser */}
-        <div className="absolute bottom-[8vh] sm:bottom-[10vh] lg:bottom-[12vh] left-1/2 -translate-x-1/2 w-[140px] sm:w-[180px] lg:w-[220px] z-30">
+        {/* Mobile Mockup - Overlapping bottom of browser, smaller and with depth */}
+        <div className="w-[180px] sm:w-[220px] mx-auto -mt-24 sm:-mt-32 lg:-mt-40 relative z-30">
           <MobileMockup scrollYProgress={scrollYProgress} />
         </div>
       </div>
