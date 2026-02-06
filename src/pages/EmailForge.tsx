@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Copy, Check, Mail, Handshake, MessageSquare, AlertTriangle, Monitor, Smartphone, Sun, Moon } from "lucide-react";
+import { Copy, Check, Mail, Handshake, MessageSquare, AlertTriangle, Monitor, Smartphone, Sun, Moon, ShieldCheck, CheckCircle, Trophy, Award, KeyRound, Newspaper } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
@@ -11,19 +11,68 @@ import {
   FeedbackAcknowledgementTemplate, 
   getFeedbackAcknowledgementHTML,
   AdminAlertTemplate, 
-  getAdminAlertHTML
+  getAdminAlertHTML,
+  EmailVerificationTemplate,
+  getEmailVerificationHTML,
+  EmailVerifiedTemplate,
+  getEmailVerifiedHTML,
+  FirstPatternMilestoneTemplate,
+  getFirstPatternMilestoneHTML,
+  BetaMilestoneTemplate,
+  getBetaMilestoneHTML,
+  PasswordResetTemplate,
+  getPasswordResetHTML,
+  BetaUpdateTemplate,
+  getBetaUpdateHTML
 } from "@/components/email/templates";
 
-type TemplateName = 'beta-welcome' | 'partnership' | 'feedback' | 'admin-alert';
+type TemplateName = 
+  | 'beta-welcome' 
+  | 'partnership' 
+  | 'feedback' 
+  | 'admin-alert'
+  | 'email-verification'
+  | 'email-verified'
+  | 'first-pattern'
+  | 'beta-milestone'
+  | 'password-reset'
+  | 'beta-update';
+
 type ViewWidth = 375 | 600;
 type ThemeMode = 'light' | 'dark';
 
-const templates = [
-  { id: 'beta-welcome' as const, label: 'Beta Welcome', icon: Mail },
-  { id: 'partnership' as const, label: 'Partnership Inquiry', icon: Handshake },
-  { id: 'feedback' as const, label: 'Feedback Acknowledgement', icon: MessageSquare },
-  { id: 'admin-alert' as const, label: 'Admin Alert', icon: AlertTriangle },
+type TemplateCategory = 'auth' | 'beta' | 'milestones' | 'admin';
+
+interface TemplateConfig {
+  id: TemplateName;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+  category: TemplateCategory;
+}
+
+const templates: TemplateConfig[] = [
+  // Authentication Emails
+  { id: 'email-verification', label: 'Verify Email', icon: ShieldCheck, category: 'auth' },
+  { id: 'email-verified', label: 'Email Verified', icon: CheckCircle, category: 'auth' },
+  { id: 'password-reset', label: 'Password Reset', icon: KeyRound, category: 'auth' },
+  // Beta Journey
+  { id: 'beta-welcome', label: 'Beta Welcome', icon: Mail, category: 'beta' },
+  { id: 'beta-update', label: 'Beta Update', icon: Newspaper, category: 'beta' },
+  // Milestones & Achievements
+  { id: 'first-pattern', label: 'First Pattern', icon: Trophy, category: 'milestones' },
+  { id: 'beta-milestone', label: 'Achievement', icon: Award, category: 'milestones' },
+  // Form Responses & Admin
+  { id: 'partnership', label: 'Partnership Inquiry', icon: Handshake, category: 'admin' },
+  { id: 'feedback', label: 'Feedback Received', icon: MessageSquare, category: 'admin' },
+  { id: 'admin-alert', label: 'Admin Alert', icon: AlertTriangle, category: 'admin' },
 ];
+
+const categoryLabels: Record<TemplateCategory, string> = {
+  auth: 'Authentication',
+  beta: 'Beta Journey',
+  milestones: 'Milestones',
+  admin: 'Admin & Responses'
+};
 
 export default function EmailForge() {
   const [activeTemplate, setActiveTemplate] = useState<TemplateName>('beta-welcome');
@@ -46,6 +95,24 @@ export default function EmailForge() {
       case 'admin-alert':
         html = getAdminAlertHTML(theme);
         break;
+      case 'email-verification':
+        html = getEmailVerificationHTML(theme);
+        break;
+      case 'email-verified':
+        html = getEmailVerifiedHTML(theme);
+        break;
+      case 'first-pattern':
+        html = getFirstPatternMilestoneHTML(theme);
+        break;
+      case 'beta-milestone':
+        html = getBetaMilestoneHTML(theme);
+        break;
+      case 'password-reset':
+        html = getPasswordResetHTML(theme);
+        break;
+      case 'beta-update':
+        html = getBetaUpdateHTML(theme);
+        break;
     }
     
     navigator.clipboard.writeText(html);
@@ -64,8 +131,31 @@ export default function EmailForge() {
         return <FeedbackAcknowledgementTemplate theme={theme} />;
       case 'admin-alert':
         return <AdminAlertTemplate theme={theme} />;
+      case 'email-verification':
+        return <EmailVerificationTemplate theme={theme} />;
+      case 'email-verified':
+        return <EmailVerifiedTemplate theme={theme} />;
+      case 'first-pattern':
+        return <FirstPatternMilestoneTemplate theme={theme} />;
+      case 'beta-milestone':
+        return <BetaMilestoneTemplate theme={theme} />;
+      case 'password-reset':
+        return <PasswordResetTemplate theme={theme} />;
+      case 'beta-update':
+        return <BetaUpdateTemplate theme={theme} />;
     }
   };
+
+  // Group templates by category
+  const templatesByCategory = templates.reduce((acc, template) => {
+    if (!acc[template.category]) {
+      acc[template.category] = [];
+    }
+    acc[template.category].push(template);
+    return acc;
+  }, {} as Record<TemplateCategory, TemplateConfig[]>);
+
+  const categoryOrder: TemplateCategory[] = ['auth', 'beta', 'milestones', 'admin'];
 
   return (
     <div className="min-h-screen bg-background flex">
@@ -78,32 +168,36 @@ export default function EmailForge() {
         </div>
         
         {/* Template Navigation */}
-        <nav className="flex-1 p-4">
-          <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3 px-2">
-            Templates
-          </p>
-          <ul className="space-y-1">
-            {templates.map((template) => {
-              const Icon = template.icon;
-              const isActive = activeTemplate === template.id;
-              
-              return (
-                <li key={template.id}>
-                  <button
-                    onClick={() => setActiveTemplate(template.id)}
-                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
-                      isActive 
-                        ? 'bg-primary/10 text-primary border border-primary/20' 
-                        : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
-                    }`}
-                  >
-                    <Icon className="w-4 h-4" />
-                    {template.label}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
+        <nav className="flex-1 p-4 overflow-auto">
+          {categoryOrder.map((category) => (
+            <div key={category} className="mb-4">
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2 px-2">
+                {categoryLabels[category]}
+              </p>
+              <ul className="space-y-1">
+                {templatesByCategory[category]?.map((template) => {
+                  const Icon = template.icon;
+                  const isActive = activeTemplate === template.id;
+                  
+                  return (
+                    <li key={template.id}>
+                      <button
+                        onClick={() => setActiveTemplate(template.id)}
+                        className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                          isActive 
+                            ? 'bg-primary/10 text-primary border border-primary/20' 
+                            : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
+                        }`}
+                      >
+                        <Icon className="w-4 h-4 flex-shrink-0" />
+                        <span className="truncate">{template.label}</span>
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
         </nav>
         
         {/* View Controls */}

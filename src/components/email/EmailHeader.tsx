@@ -1,4 +1,5 @@
-import logoHorizontal from "@/assets/logo-horizontal.svg";
+import verticalLogoSlogan from "@/assets/vertical-logo-slogan.svg";
+import verticalLogoSloganWhite from "@/assets/vertical-logo-slogan-white.svg";
 
 interface EmailHeaderProps {
   theme: 'light' | 'dark';
@@ -6,6 +7,7 @@ interface EmailHeaderProps {
 
 export function EmailHeader({ theme }: EmailHeaderProps) {
   const bgColor = theme === 'dark' ? '#0f172a' : '#ffffff';
+  const logoSrc = theme === 'dark' ? verticalLogoSloganWhite : verticalLogoSlogan;
   
   return (
     <table 
@@ -20,15 +22,15 @@ export function EmailHeader({ theme }: EmailHeaderProps) {
     >
       <tbody>
         <tr>
-          <td style={{ padding: '24px 32px', textAlign: 'center' }}>
+          <td style={{ padding: '32px', textAlign: 'center' }}>
             <img 
-              src={logoHorizontal} 
-              alt="BlanketSmith" 
+              src={logoSrc} 
+              alt="BlanketSmith - Craft Meets Code" 
               width="180"
               style={{ 
                 display: 'inline-block',
                 height: 'auto',
-                filter: theme === 'dark' ? 'brightness(1.1)' : 'none'
+                maxHeight: '180px'
               }}
             />
           </td>
@@ -41,12 +43,13 @@ export function EmailHeader({ theme }: EmailHeaderProps) {
 export function getEmailHeaderHTML(theme: 'light' | 'dark', logoUrl: string): string {
   const bgColor = theme === 'dark' ? '#0f172a' : '#ffffff';
   const borderColor = theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
+  // logoUrl should be the vertical logo - white for dark theme, dark for light theme
   
   return `
 <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color: ${bgColor}; border-bottom: 1px solid ${borderColor};">
   <tr>
-    <td style="padding: 24px 32px; text-align: center;">
-      <img src="${logoUrl}" alt="BlanketSmith" width="180" style="display: inline-block; height: auto;${theme === 'dark' ? ' filter: brightness(1.1);' : ''}" />
+    <td style="padding: 32px; text-align: center;">
+      <img src="${logoUrl}" alt="BlanketSmith - Craft Meets Code" width="180" style="display: inline-block; height: auto; max-height: 180px;" />
     </td>
   </tr>
 </table>`;
