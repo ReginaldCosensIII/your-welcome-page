@@ -1,4 +1,5 @@
-import logoBadge from "@/assets/logo-badge.svg";
+import horizontalLogoWhite from "@/assets/horizontal-logo-white.svg";
+import logoHorizontal from "@/assets/logo-horizontal.svg";
 
 interface EmailFooterProps {
   theme: 'light' | 'dark';
@@ -8,6 +9,7 @@ export function EmailFooter({ theme }: EmailFooterProps) {
   const bgColor = theme === 'dark' ? '#0a0f1a' : '#f1f5f9';
   const textColor = theme === 'dark' ? '#64748b' : '#94a3b8';
   const borderColor = theme === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
+  const logoSrc = theme === 'dark' ? horizontalLogoWhite : logoHorizontal;
   
   return (
     <table 
@@ -24,10 +26,10 @@ export function EmailFooter({ theme }: EmailFooterProps) {
         <tr>
           <td style={{ padding: '32px', textAlign: 'center' }}>
             <img 
-              src={logoBadge}
+              src={logoSrc}
               alt="BlanketSmith"
-              width="48"
-              style={{ marginBottom: '16px' }}
+              width="160"
+              style={{ marginBottom: '20px', height: 'auto' }}
             />
             
             {/* Social Links */}
@@ -112,7 +114,7 @@ export function getEmailFooterHTML(theme: 'light' | 'dark', logoUrl: string): st
 <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color: ${bgColor}; border-top: 1px solid ${borderColor};">
   <tr>
     <td style="padding: 32px; text-align: center;">
-      <img src="${logoUrl}" alt="BlanketSmith" width="48" style="margin-bottom: 16px;" />
+      <img src="${logoUrl}" alt="BlanketSmith" width="160" style="margin-bottom: 20px; height: auto;" />
       
       <div style="margin-bottom: 24px;">
         <a href="https://twitter.com/blanketsmith" style="display: inline-block; margin: 0 8px; color: ${textColor}; text-decoration: none; font-family: 'Inter', sans-serif; font-size: 14px;">Twitter</a>
