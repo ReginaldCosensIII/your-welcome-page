@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
   Compass,
@@ -14,12 +14,13 @@ import {
   Users,
   Store,
   TrendingUp,
-  ChevronDown,
   CheckCircle2,
   Clock,
   Zap,
   Eye,
   Sparkles,
+  X,
+  MapPin,
 } from "lucide-react";
 
 type PhaseStatus = "completed" | "in-progress" | "up-next" | "planned" | "future";
@@ -51,7 +52,7 @@ const phases: Phase[] = [
       "Established the strategy: tool first, platform second",
     ],
     whyItMatters:
-      "A strong foundation ensures every future decision has a clear north star. We invested here so the product grows with purpose, not just features.",
+      "A strong foundation ensures every future decision has a clear north star.",
   },
   {
     id: 2,
@@ -59,7 +60,7 @@ const phases: Phase[] = [
     status: "in-progress",
     icon: Wrench,
     summary:
-      "Before opening BlanketSmith to real users, the focus is on reducing friction, improving usability, and making the first experience feel polished, trustworthy, and easy to understand.",
+      "Before opening BlanketSmith to real users, the focus is on reducing friction, improving usability, and making the first experience feel polished.",
     highlights: [
       "Improving usability and workflow efficiency",
       "Polishing the editor experience",
@@ -69,7 +70,7 @@ const phases: Phase[] = [
       "Finalizing the first public-facing beta funnel",
     ],
     whyItMatters:
-      "First impressions matter. This phase ensures that when makers try BlanketSmith for the first time, it feels like a real product—not an experiment.",
+      "First impressions matter. This phase ensures makers try a real product—not an experiment.",
   },
   {
     id: 3,
@@ -77,7 +78,7 @@ const phases: Phase[] = [
     status: "up-next",
     icon: UserPlus,
     summary:
-      "Pre-beta is about opening the door carefully. Early users get a chance to explore the tool, understand its value, and help shape the experience before the broader beta testing phase officially begins.",
+      "Early users get a chance to explore the tool, understand its value, and help shape the experience before the broader beta.",
     highlights: [
       "Opening signups for interested makers",
       "Offering limited pre-beta access to the tool",
@@ -87,7 +88,7 @@ const phases: Phase[] = [
       "Using community outreach to attract aligned early users",
     ],
     whyItMatters:
-      "Real feedback from real makers before beta launch means we can solve problems early and build confidence in the product before a wider audience sees it.",
+      "Real feedback before beta launch means we can solve problems early.",
   },
   {
     id: 4,
@@ -95,7 +96,7 @@ const phases: Phase[] = [
     status: "planned",
     icon: Rocket,
     summary:
-      "Beta marks the transition from internal product building to real-world validation. The goal is not just to test the software, but to learn directly from the people BlanketSmith is being built for.",
+      "Beta marks the transition from internal product building to real-world validation with the maker community.",
     highlights: [
       "Launching the official beta program",
       "Onboarding beta testers from the maker community",
@@ -105,7 +106,7 @@ const phases: Phase[] = [
       "Building trust and visibility in the community",
     ],
     whyItMatters:
-      "Beta is the first major milestone where the community gets hands-on. Their feedback directly shapes what BlanketSmith becomes.",
+      "Beta is the first major milestone where the community gets hands-on.",
   },
   {
     id: 5,
@@ -113,7 +114,7 @@ const phases: Phase[] = [
     status: "planned",
     icon: MessageSquare,
     summary:
-      "This phase turns feedback into momentum. The focus is on making BlanketSmith stronger, smoother, and more dependable before its first full public release.",
+      "This phase turns feedback into momentum—making BlanketSmith stronger, smoother, and more dependable.",
     highlights: [
       "Resolving major pain points discovered during beta",
       "Improving workflow clarity and onboarding",
@@ -129,7 +130,7 @@ const phases: Phase[] = [
     status: "planned",
     icon: Globe,
     summary:
-      "The first full release transforms BlanketSmith from an evolving beta product into a stable creative tool with a clear long-term future.",
+      "The first full release transforms BlanketSmith from a beta product into a stable creative tool with a clear future.",
     highlights: [
       "Releasing the first stable public version",
       "Moving into a healthier maintenance and enhancement rhythm",
@@ -138,7 +139,7 @@ const phases: Phase[] = [
       "Marking the tool as a real standalone product",
     ],
     whyItMatters:
-      "This milestone is significant because it frees development focus. Once the core tool is stable, the project can shift more attention toward the broader platform vision.",
+      "Once the core tool is stable, the project can shift attention toward the broader platform vision.",
   },
   {
     id: 7,
@@ -146,7 +147,7 @@ const phases: Phase[] = [
     status: "future",
     icon: Users,
     summary:
-      "BlanketSmith is not meant to stop at software. The long-term vision is a platform where makers can learn, share, grow, and find the resources they need in one trusted place.",
+      "The long-term vision is a platform where makers can learn, share, grow, and find the resources they need.",
     highlights: [
       "Blog and educational content for makers",
       "Tutorials, guides, and video-based learning",
@@ -162,7 +163,7 @@ const phases: Phase[] = [
     status: "future",
     icon: Store,
     summary:
-      "As the community grows, BlanketSmith expands into an ecosystem where makers do more than design—they connect, share, sell, and build something lasting.",
+      "An ecosystem where makers do more than design—they connect, share, sell, and build something lasting.",
     highlights: [
       "Marketplace for patterns and templates",
       "Space for handmade products and supplies",
@@ -172,7 +173,7 @@ const phases: Phase[] = [
       "Platform features that support long-term creator value",
     ],
     whyItMatters:
-      "The marketplace isn't about revenue first—it's about enabling maker opportunity, supporting creator growth, and making the platform sustainable.",
+      "Enabling maker opportunity and making the platform sustainable.",
   },
   {
     id: 9,
@@ -180,7 +181,7 @@ const phases: Phase[] = [
     status: "future",
     icon: TrendingUp,
     summary:
-      "The goal is to grow carefully: keep the platform accessible, protect the community-first mission, and build enough sustainability to support long-term scale.",
+      "Grow carefully: keep the platform accessible, protect the community-first mission, and build long-term sustainability.",
     highlights: [
       "Supporting platform growth without losing quality",
       "Funding hosting and infrastructure responsibly",
@@ -191,161 +192,202 @@ const phases: Phase[] = [
   },
 ];
 
-const statusConfig: Record<PhaseStatus, { label: string; color: string; bgColor: string; borderColor: string }> = {
+const statusConfig: Record<PhaseStatus, { label: string; color: string; glowColor: string; ringColor: string }> = {
   completed: {
     label: "Completed",
-    color: "text-emerald-600",
-    bgColor: "bg-emerald-500/10",
-    borderColor: "border-emerald-500/30",
+    color: "bg-emerald-500",
+    glowColor: "shadow-[0_0_20px_rgba(16,185,129,0.4)]",
+    ringColor: "ring-emerald-500/30",
   },
   "in-progress": {
     label: "In Progress",
-    color: "text-brand-midblue",
-    bgColor: "bg-brand-midblue/10",
-    borderColor: "border-brand-midblue/30",
+    color: "bg-brand-midblue",
+    glowColor: "shadow-[0_0_24px_rgba(55,79,217,0.5)]",
+    ringColor: "ring-brand-midblue/40",
   },
   "up-next": {
     label: "Up Next",
-    color: "text-brand-purple",
-    bgColor: "bg-brand-purple/10",
-    borderColor: "border-brand-purple/30",
+    color: "bg-brand-purple",
+    glowColor: "shadow-[0_0_20px_rgba(124,42,232,0.4)]",
+    ringColor: "ring-brand-purple/30",
   },
   planned: {
     label: "Planned",
-    color: "text-muted-foreground",
-    bgColor: "bg-muted/60",
-    borderColor: "border-border",
+    color: "bg-muted-foreground/60",
+    glowColor: "",
+    ringColor: "ring-border",
   },
   future: {
     label: "Future Vision",
-    color: "text-brand-cyan",
-    bgColor: "bg-brand-cyan/10",
-    borderColor: "border-brand-cyan/30",
+    color: "bg-brand-cyan/70",
+    glowColor: "shadow-[0_0_16px_rgba(14,200,252,0.25)]",
+    ringColor: "ring-brand-cyan/20",
   },
 };
 
-function StatusBadge({ status }: { status: PhaseStatus }) {
-  const cfg = statusConfig[status];
-  return (
-    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium ${cfg.color} ${cfg.bgColor} border ${cfg.borderColor}`}>
-      {status === "completed" && <CheckCircle2 className="w-3 h-3" />}
-      {status === "in-progress" && <Clock className="w-3 h-3 animate-pulse" />}
-      {status === "up-next" && <Zap className="w-3 h-3" />}
-      {status === "planned" && <Eye className="w-3 h-3" />}
-      {status === "future" && <Sparkles className="w-3 h-3" />}
-      {cfg.label}
-    </span>
-  );
-}
-
-function PhaseCard({ phase, index }: { phase: Phase; index: number }) {
-  const [expanded, setExpanded] = useState(false);
+function MapNode({ phase, index, onSelect, isSelected }: { phase: Phase; index: number; onSelect: (id: number) => void; isSelected: boolean }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-
+  const isInView = useInView(ref, { once: true, margin: "-60px" });
+  const cfg = statusConfig[phase.status];
   const isActive = phase.status === "in-progress";
+  const side = index % 2 === 0 ? "left" : "right";
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
-      className="relative"
+      initial={{ opacity: 0, x: side === "left" ? -40 : 40 }}
+      animate={isInView ? { opacity: 1, x: 0 } : {}}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className={`relative flex items-center gap-0 ${side === "right" ? "flex-row-reverse" : ""}`}
+      style={{ minHeight: "100px" }}
     >
-      {/* Timeline connector */}
-      {index < phases.length - 1 && (
-        <div className="absolute left-6 lg:left-8 top-16 bottom-0 w-px bg-border z-0" />
-      )}
-
+      {/* Content card */}
       <div
-        className={`relative z-10 rounded-2xl border p-5 sm:p-6 lg:p-8 transition-all duration-300 cursor-pointer group ${
-          isActive
-            ? "border-brand-midblue/40 bg-brand-midblue/5 shadow-[0_0_30px_rgba(55,79,217,0.08)]"
-            : "border-border bg-card hover:border-primary/20 hover:shadow-soft"
-        }`}
-        onClick={() => setExpanded(!expanded)}
+        className={`w-[calc(50%-32px)] shrink-0 cursor-pointer group ${side === "left" ? "text-right pr-4 sm:pr-6" : "text-left pl-4 sm:pl-6"}`}
+        onClick={() => onSelect(isSelected ? -1 : phase.id)}
       >
-        <div className="flex items-start gap-4 lg:gap-6">
-          {/* Phase number + icon */}
-          <div
-            className={`shrink-0 w-12 h-12 lg:w-16 lg:h-16 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 ${
-              isActive
-                ? "gradient-bg shadow-glow"
-                : phase.status === "completed"
-                ? "bg-emerald-500/10 border border-emerald-500/30"
-                : "bg-secondary border border-border group-hover:border-primary/30"
+        <motion.div
+          whileHover={{ scale: 1.03, y: -2 }}
+          whileTap={{ scale: 0.98 }}
+          className={`inline-block rounded-2xl border p-4 sm:p-5 transition-all duration-300 ${
+            isSelected
+              ? "border-brand-midblue/50 bg-brand-midblue/5 shadow-[0_0_30px_rgba(55,79,217,0.12)]"
+              : isActive
+              ? "border-brand-midblue/30 bg-card shadow-[0_0_20px_rgba(55,79,217,0.08)]"
+              : "border-border bg-card hover:border-primary/20 hover:shadow-soft"
+          }`}
+        >
+          <div className={`flex items-center gap-2 mb-2 ${side === "right" ? "" : "justify-end"}`}>
+            <span className={`text-[10px] font-bold uppercase tracking-widest ${
+              phase.status === "completed" ? "text-emerald-500"
+              : phase.status === "in-progress" ? "text-brand-midblue"
+              : phase.status === "up-next" ? "text-brand-purple"
+              : phase.status === "future" ? "text-brand-cyan"
+              : "text-muted-foreground"
+            }`}>
+              {cfg.label}
+            </span>
+          </div>
+          <h3 className="font-display text-sm sm:text-base lg:text-lg font-bold text-foreground group-hover:text-brand-midblue transition-colors leading-tight">
+            {phase.title}
+          </h3>
+          <p className="text-xs sm:text-sm text-muted-foreground mt-1.5 leading-relaxed line-clamp-2">
+            {phase.summary}
+          </p>
+        </motion.div>
+      </div>
+
+      {/* Center node - the map pin */}
+      <div className="relative z-20 shrink-0 flex items-center justify-center" style={{ width: "64px" }}>
+        <motion.button
+          onClick={() => onSelect(isSelected ? -1 : phase.id)}
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.9 }}
+          className={`relative w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center ring-4 ${cfg.ringColor} ${cfg.glowColor} transition-all duration-300 ${
+            isActive
+              ? "gradient-bg"
+              : phase.status === "completed"
+              ? "bg-emerald-500"
+              : phase.status === "up-next"
+              ? "bg-brand-purple"
+              : phase.status === "future"
+              ? "bg-brand-cyan/20 border-2 border-brand-cyan/40"
+              : "bg-secondary border-2 border-border"
+          }`}
+        >
+          <phase.icon
+            className={`w-5 h-5 sm:w-6 sm:h-6 ${
+              phase.status === "completed" || isActive || phase.status === "up-next"
+                ? "text-white"
+                : phase.status === "future"
+                ? "text-brand-cyan"
+                : "text-muted-foreground"
             }`}
-          >
-            <phase.icon
-              className={`w-5 h-5 lg:w-7 lg:h-7 ${
-                isActive ? "text-white" : phase.status === "completed" ? "text-emerald-600" : "text-muted-foreground group-hover:text-brand-midblue"
-              }`}
-              strokeWidth={1.5}
+            strokeWidth={1.5}
+          />
+          {isActive && (
+            <motion.div
+              className="absolute inset-0 rounded-full border-2 border-brand-midblue/50"
+              animate={{ scale: [1, 1.4, 1], opacity: [0.6, 0, 0.6] }}
+              transition={{ duration: 2, repeat: Infinity }}
             />
-          </div>
+          )}
+        </motion.button>
+        {/* Phase number */}
+        <span className="absolute -top-2 -right-1 w-5 h-5 rounded-full bg-foreground text-background text-[10px] font-bold flex items-center justify-center">
+          {phase.id}
+        </span>
+      </div>
 
-          <div className="flex-1 min-w-0">
-            <div className="flex flex-wrap items-center gap-3 mb-2">
-              <span className="text-xs font-medium text-muted-foreground">Phase {phase.id}</span>
-              <StatusBadge status={phase.status} />
+      {/* Empty spacer for the other side */}
+      <div className="w-[calc(50%-32px)] shrink-0" />
+    </motion.div>
+  );
+}
+
+function DetailPanel({ phase, onClose }: { phase: Phase; onClose: () => void }) {
+  const cfg = statusConfig[phase.status];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: 10, scale: 0.97 }}
+      transition={{ duration: 0.3 }}
+      className="relative max-w-2xl mx-auto my-4 rounded-2xl border border-brand-midblue/20 bg-card shadow-[0_8px_40px_rgba(55,79,217,0.1)] overflow-hidden"
+    >
+      {/* Gradient top bar */}
+      <div className="h-1" style={{ background: "var(--gradient-brand)" }} />
+
+      <div className="p-6 sm:p-8">
+        <div className="flex items-start justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+              phase.status === "completed" ? "bg-emerald-500/10" : phase.status === "in-progress" ? "bg-brand-midblue/10" : phase.status === "up-next" ? "bg-brand-purple/10" : phase.status === "future" ? "bg-brand-cyan/10" : "bg-muted"
+            }`}>
+              <phase.icon className={`w-5 h-5 ${
+                phase.status === "completed" ? "text-emerald-500" : phase.status === "in-progress" ? "text-brand-midblue" : phase.status === "up-next" ? "text-brand-purple" : phase.status === "future" ? "text-brand-cyan" : "text-muted-foreground"
+              }`} strokeWidth={1.5} />
             </div>
-
-            <h3 className="font-display text-lg sm:text-xl lg:text-2xl font-bold text-foreground mb-2 group-hover:text-brand-midblue transition-colors">
-              {phase.title}
-            </h3>
-
-            <p className="font-sans text-sm sm:text-base text-muted-foreground leading-relaxed">
-              {phase.summary}
-            </p>
-
-            {/* Expand indicator */}
-            <div className="mt-3 flex items-center gap-1.5 text-xs text-muted-foreground">
-              <ChevronDown
-                className={`w-4 h-4 transition-transform duration-300 ${expanded ? "rotate-180" : ""}`}
-              />
-              <span>{expanded ? "Show less" : "View details"}</span>
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Phase {phase.id}</span>
+              <h3 className="font-display text-xl font-bold text-foreground">{phase.title}</h3>
             </div>
           </div>
+          <button onClick={onClose} className="p-2 rounded-lg hover:bg-secondary transition-colors text-muted-foreground hover:text-foreground">
+            <X className="w-4 h-4" />
+          </button>
         </div>
 
-        {/* Expanded content */}
-        {expanded && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="mt-6 ml-16 lg:ml-[88px] border-t border-border pt-6"
-          >
-            <h4 className="font-display text-sm font-semibold text-foreground mb-3">Key Highlights</h4>
-            <ul className="space-y-2 mb-4">
-              {phase.highlights.map((h, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <div className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0" style={{ background: "var(--gradient-brand)" }} />
-                  {h}
-                </li>
-              ))}
-            </ul>
+        <p className="text-sm text-muted-foreground leading-relaxed mb-5">{phase.summary}</p>
 
-            {phase.whyItMatters && (
-              <div className="rounded-xl bg-secondary/50 border border-border p-4">
-                <p className="text-xs font-semibold text-brand-midblue mb-1">Why This Matters</p>
-                <p className="text-sm text-muted-foreground leading-relaxed">{phase.whyItMatters}</p>
-              </div>
-            )}
-          </motion.div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-5">
+          {phase.highlights.map((h, i) => (
+            <div key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+              <div className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0 bg-brand-midblue" />
+              {h}
+            </div>
+          ))}
+        </div>
+
+        {phase.whyItMatters && (
+          <div className="rounded-xl bg-secondary/50 border border-border p-4">
+            <p className="text-xs font-semibold text-brand-midblue mb-1">Why This Matters</p>
+            <p className="text-sm text-muted-foreground leading-relaxed">{phase.whyItMatters}</p>
+          </div>
         )}
       </div>
     </motion.div>
   );
 }
 
-// Find the current active phase index for the progress bar
 const currentPhaseIndex = phases.findIndex((p) => p.status === "in-progress");
 const progressPercent = ((currentPhaseIndex + 0.5) / phases.length) * 100;
 
 export default function Roadmap() {
+  const [selectedId, setSelectedId] = useState<number>(-1);
+  const selectedPhase = phases.find((p) => p.id === selectedId);
+
   return (
     <Layout>
       {/* Hero */}
@@ -356,19 +398,15 @@ export default function Roadmap() {
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-midblue/10 border border-brand-purple/30 mb-6">
-              <Compass className="w-4 h-4 text-brand-midblue" />
-              <span className="text-sm font-medium text-brand-midblue">Product Roadmap</span>
+              <MapPin className="w-4 h-4 text-brand-midblue" />
+              <span className="text-sm font-medium text-brand-midblue">Interactive Roadmap</span>
             </div>
 
             <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-foreground mb-5">
               The BlanketSmith{" "}
-              <span className="gradient-text">Roadmap</span>
+              <span className="gradient-text">Journey</span>
             </h1>
 
             <p className="font-sans text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto mb-4 leading-relaxed">
@@ -376,13 +414,12 @@ export default function Roadmap() {
             </p>
 
             <p className="font-sans text-base text-muted-foreground max-w-2xl mx-auto mb-10">
-              BlanketSmith starts with a better way to design and build patterns, then grows into a
-              place where makers can learn, share, connect, and build something bigger together.
+              Explore each milestone on our map. Click any node to discover the details of that phase.
             </p>
 
             <Button variant="gradient" size="lg" asChild>
-              <a href="#roadmap-timeline">
-                Explore the Roadmap
+              <a href="#roadmap-map">
+                Explore the Map
                 <ArrowRight className="w-4 h-4" />
               </a>
             </Button>
@@ -395,16 +432,12 @@ export default function Roadmap() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-8">
-              <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground mb-3">
-                Where We Are Now
-              </h2>
+              <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground mb-3">Where We Are Now</h2>
               <p className="font-sans text-muted-foreground">
-                BlanketSmith is currently moving from private product building into early public access
-                and beta preparation.
+                BlanketSmith is currently moving from private product building into early public access and beta preparation.
               </p>
             </div>
 
-            {/* Progress bar */}
             <div className="relative">
               <div className="h-2 rounded-full bg-secondary overflow-hidden">
                 <motion.div
@@ -423,47 +456,61 @@ export default function Roadmap() {
                 <span className="text-xs text-muted-foreground">Platform</span>
               </div>
             </div>
-
-            {/* Now / Next / Later strip */}
-            <div className="grid grid-cols-3 gap-4 mt-8">
-              {[
-                { label: "Now", desc: "Polishing the tool and beta readiness", status: "in-progress" as PhaseStatus },
-                { label: "Next", desc: "Pre-beta signups and early access", status: "up-next" as PhaseStatus },
-                { label: "Later", desc: "Beta launch and community testing", status: "planned" as PhaseStatus },
-              ].map((item) => (
-                <div
-                  key={item.label}
-                  className="rounded-xl border border-border bg-card p-4 text-center hover:border-primary/20 hover:shadow-soft transition-all"
-                >
-                  <StatusBadge status={item.status} />
-                  <p className="font-display text-lg font-bold text-foreground mt-3">{item.label}</p>
-                  <p className="text-xs text-muted-foreground mt-1">{item.desc}</p>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
 
-      {/* Interactive Timeline */}
-      <section id="roadmap-timeline" className="py-20 lg:py-28 scroll-mt-24">
+      {/* Interactive Map Timeline */}
+      <section id="roadmap-map" className="py-20 lg:py-28 scroll-mt-24 relative overflow-hidden">
+        {/* Subtle background decorations */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-1/4 left-0 w-[300px] h-[300px] opacity-[0.06] blur-3xl rounded-full gradient-bg" />
+          <div className="absolute top-2/3 right-0 w-[350px] h-[350px] opacity-[0.06] blur-3xl rounded-full gradient-bg" />
+        </div>
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-14">
-              <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">
-                The Journey
-              </h2>
-              <p className="font-sans text-muted-foreground max-w-2xl mx-auto">
-                Click any phase to explore the details. The roadmap is designed to grow in the right
-                order: start with usefulness, earn trust through quality, listen during beta, then
-                expand into the broader community platform vision.
-              </p>
+          <div className="text-center mb-14">
+            <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">The Journey Map</h2>
+            <p className="font-sans text-muted-foreground max-w-2xl mx-auto">
+              Each milestone on the path represents a phase in BlanketSmith's evolution. Click any node to explore its details.
+            </p>
+          </div>
+
+          <div className="max-w-5xl mx-auto relative">
+            {/* Central path line */}
+            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 z-10">
+              <div className="w-full h-full bg-gradient-to-b from-emerald-500 via-brand-midblue to-brand-cyan/30 rounded-full" />
             </div>
 
-            <div className="space-y-4">
+            {/* Map nodes */}
+            <div className="relative z-10 space-y-2 sm:space-y-4">
               {phases.map((phase, index) => (
-                <PhaseCard key={phase.id} phase={phase} index={index} />
+                <div key={phase.id}>
+                  <MapNode
+                    phase={phase}
+                    index={index}
+                    onSelect={setSelectedId}
+                    isSelected={selectedId === phase.id}
+                  />
+                  {/* Inline detail panel */}
+                  <AnimatePresence>
+                    {selectedId === phase.id && selectedPhase && (
+                      <DetailPanel phase={selectedPhase} onClose={() => setSelectedId(-1)} />
+                    )}
+                  </AnimatePresence>
+                </div>
               ))}
+            </div>
+
+            {/* Start marker */}
+            <div className="absolute left-1/2 -top-4 -translate-x-1/2 z-20">
+              <div className="w-4 h-4 rounded-full bg-emerald-500 ring-4 ring-emerald-500/20" />
+            </div>
+
+            {/* End marker */}
+            <div className="absolute left-1/2 -bottom-4 -translate-x-1/2 z-20 flex flex-col items-center gap-1">
+              <div className="w-4 h-4 rounded-full bg-brand-cyan/50 ring-4 ring-brand-cyan/15" />
+              <span className="text-[10px] text-brand-cyan font-medium whitespace-nowrap">The Future</span>
             </div>
           </div>
         </div>
@@ -503,14 +550,10 @@ export default function Roadmap() {
       <section className="py-20 lg:py-28">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              Beyond the Tool
-            </h2>
+            <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">Beyond the Tool</h2>
             <p className="font-sans text-muted-foreground text-lg leading-relaxed mb-10">
               The long-term vision for BlanketSmith is a platform where digital tools, education,
-              community, and creator opportunity all come together in one place. The future is not
-              just more features—it's better support for makers, a stronger knowledge ecosystem,
-              more visibility for creators, and a place to share and grow.
+              community, and creator opportunity all come together in one place.
             </p>
             <div className="inline-flex items-center gap-3 px-5 py-3 rounded-xl border border-border bg-card">
               <div className="flex -space-x-2">
@@ -535,9 +578,7 @@ export default function Roadmap() {
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yLjIxLTEuNzktNC00LTRzLTQgMS43OS00IDQgMS43OSA0IDQgNCA0LTEuNzkgNC00eiIvPjwvZz48L2c+PC9zdmc+')] opacity-30" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="font-display text-3xl sm:text-4xl font-bold text-primary-foreground mb-6">
-              Join the Journey
-            </h2>
+            <h2 className="font-display text-3xl sm:text-4xl font-bold text-primary-foreground mb-6">Join the Journey</h2>
             <p className="font-sans text-primary-foreground/80 text-lg mb-10">
               BlanketSmith is being built one thoughtful phase at a time—with the goal of giving
               makers better tools today and a stronger platform tomorrow.
