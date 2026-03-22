@@ -6,6 +6,7 @@ import logoHorizontal from "@/assets/logo-horizontal.svg";
 
 const navLinks = [
   { label: "Home", href: "/" },
+  { label: "Roadmap", href: "/roadmap" },
   { label: "Join Beta", href: "/beta-signup" },
   { label: "Feedback", href: "/feedback" },
   { label: "Partner", href: "/partnerships" },
