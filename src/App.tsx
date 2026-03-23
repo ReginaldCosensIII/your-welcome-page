@@ -10,6 +10,7 @@ import Partnerships from "./pages/Partnerships";
 import Contact from "./pages/Contact";
 import EmailForge from "./pages/EmailForge";
 import Roadmap from "./pages/Roadmap";
+import RoadmapJourney from "./pages/RoadmapJourney";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
