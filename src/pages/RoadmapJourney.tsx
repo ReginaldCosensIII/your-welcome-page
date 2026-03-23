@@ -790,7 +790,7 @@ export default function RoadmapJourney() {
                         ? "border-border bg-card/90 shadow-md"
                         : "border-border/50 bg-card/50"
                     } ${isMajor ? "ring-1" : ""}`}
-                    style={isMajor ? { ringColor: `${m.color}30` } : {}}
+                    style={isMajor ? { ["--tw-ring-color" as string]: `${m.color}30` } : {}}
                   >
                     <div className={`inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-semibold uppercase tracking-wider mb-2 ${sc.bg} ${sc.text}`}>
                       {sc.label}
