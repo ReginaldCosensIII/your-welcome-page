@@ -511,7 +511,7 @@ function ProgressNav({
                 m.id <= currentPhase
                   ? `${m.color}30`
                   : "hsl(var(--muted))",
-              ...(activeId === m.id ? { ringColor: m.color } : {}),
+              ...(activeId === m.id ? { ["--tw-ring-color" as string]: m.color } : {}),
             }}
             title={m.title}
           >
