@@ -10,6 +10,7 @@ import Partnerships from "./pages/Partnerships";
 import Contact from "./pages/Contact";
 import EmailForge from "./pages/EmailForge";
 import Roadmap from "./pages/Roadmap";
+import RoadmapJourney from "./pages/RoadmapJourney";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/email-forge" element={<EmailForge />} />
           <Route path="/roadmap" element={<Roadmap />} />
+          <Route path="/roadmap-journey" element={<RoadmapJourney />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
