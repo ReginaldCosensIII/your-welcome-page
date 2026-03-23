@@ -29,6 +29,7 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/email-forge" element={<EmailForge />} />
           <Route path="/roadmap" element={<Roadmap />} />
+          <Route path="/roadmap-journey" element={<RoadmapJourney />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
