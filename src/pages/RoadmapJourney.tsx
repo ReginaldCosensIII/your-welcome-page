@@ -357,7 +357,7 @@ function LandmarkNode({
               }`}
               style={{
                 background: `linear-gradient(135deg, ${milestone.color}30, ${milestone.color}10)`,
-                ...(isMajor ? { ringColor: milestone.color } : {}),
+                ...(isMajor ? { ["--tw-ring-color" as string]: milestone.color } : {}),
               }}
             >
               <Icon className="w-5 h-5 md:w-6 md:h-6" style={{ color: milestone.color }} />
