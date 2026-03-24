@@ -8,6 +8,7 @@ const navLinks = [
   { label: "Home", href: "/" },
   { label: "Roadmap", href: "/roadmap" },
   { label: "Journey Map", href: "/roadmap-journey" },
+  { label: "Blanket Map", href: "/roadmap-blanket" },
   { label: "Join Beta", href: "/beta-signup" },
   { label: "Feedback", href: "/feedback" },
   { label: "Partner", href: "/partnerships" },
